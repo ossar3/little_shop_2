@@ -31,4 +31,26 @@ RSpec.describe "Merchants endpoints", type: :request do
       expect(attributes[:name]).to be_a(String)
     end
   end
+
+  it "can retrieve a single merchant by id" do
+    id = @merchant_1.id
+    get "/api/v1/merchants/#{id}"
+
+    merchant = JSON.parse(response.body, symbolize_names: true)
+   
+    expect(response.status).to eq(200)
+    expect(merchant).to have_key(:data)
+
+    expect(merchant[:data]).to have_key(:id)
+    expect(merchant[:data][:id]).to be_a(String)
+
+    expect(merchant[:data]).to have_key(:type)
+    expect(merchant[:data][:type]).to be_a(String)
+
+    expect(merchant[:data]).to have_key(:attributes)
+    attributes = merchant[:data][:attributes]
+
+    expect(attributes).to have_key(:name)
+    expect(attributes[:name]).to be_a(String)
+  end
 end
