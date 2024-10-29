@@ -16,6 +16,5 @@ Rails.application.routes.draw do
 #items below
   get "/api/v1/items", to: "api/v1/items#index"
   get "/api/v1/items/:id", to: "api/v1/items#show"
-  
   post "/api/v1/items", to: "api/v1/items#create"
 end
