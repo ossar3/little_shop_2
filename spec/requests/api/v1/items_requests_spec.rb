@@ -110,4 +110,21 @@ RSpec.describe "Item endpoints", type: :request do
     expect(attributes[:merchant_id]).to be_a(Integer)
   end
 
+  it "can update an item by id" do
+    previous_item = @item_1
+    item_params = { name: "Test", description: "is successful", unit_price: 9.99, merchant_id: @merchant_2.id}
+    headers = { "CONTENT_TYPE" => "application/json" }
+
+    put "/api/v1/items/#{@item_1.id}", headers: headers, params: JSON.generate({ item: item_params })
+
+    changed_item = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).to be_successful
+    expect(changed_item[:data][:attributes][:name]).to eq("Test")
+    expect(changed_item[:data][:attributes][:description]).to eq("is successful")
+    expect(changed_item[:data][:attributes][:unit_price]).to eq(9.99)
+    expect(changed_item[:data][:attributes][:merchant_id]).to eq(@merchant_2.id)
+
+  end
+
 end
