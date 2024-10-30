@@ -43,4 +43,25 @@ RSpec.describe "Item endpoints", type: :request do
       expect(attributes[:merchant_id]).to be_a(Integer)
     end
   end
+
+  it "can create new items" do 
+    attributes = {
+      name: "chocolate bar",
+      description: "sweet and delicious",
+      unit_price: 3.99,
+      merchant_id: 1
+    }
+
+    post "api/v1/items", params: {item: attributes}
+    item_new = JSON.parse(response.body, symbolize_names: true)
+    id = item_new[:id]
+
+    get "api/v1/item"
+
+    all_items = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).to have_http_status(200)
+    expect(item_new.name).to eq("chocolate bar")
+    expect(all_items).to include(id)
+  end
 end
