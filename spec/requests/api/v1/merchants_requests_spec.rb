@@ -88,4 +88,16 @@ RSpec.describe "Merchants endpoints", type: :request do
     expect(attributes[:name]).to be_a(String)
 
   end
+
+  it "returns merchants sorted by creation date (newest first)" do
+    get "/api/v1/merchants?sorted=age"
+
+    merchants = JSON.parse(response.body, symbolize_names: true)[:data]
+
+    expect(response).to be_successful
+
+    expect(merchants[0][:attributes][:name]).to eq("Test Merchant 3")
+    expect(merchants[1][:attributes][:name]).to eq("Test Merchant 2")
+    expect(merchants[2][:attributes][:name]).to eq("Test Merchant 1")
+  end
 end

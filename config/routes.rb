@@ -19,4 +19,7 @@ Rails.application.routes.draw do
   get "/api/v1/items/:id", to: "api/v1/items#show"
   delete "/api/v1/items/:id", to: "api/v1/items#destroy"
   post "/api/v1/items", to: "api/v1/items#create"
+
+#other 
+ get "/api/v1/merchants/:id/items", to: "api/v1/item_merchants#index" #get items belonging to a specific merchant
 end
