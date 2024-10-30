@@ -32,9 +32,5 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
-<<<<<<< Updated upstream
 # Ignore coverage
 /coverage
-=======
-/coverage
->>>>>>> Stashed changes
