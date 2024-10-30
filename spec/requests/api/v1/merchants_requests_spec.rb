@@ -86,7 +86,6 @@ RSpec.describe "Merchants endpoints", type: :request do
 
     expect(attributes).to have_key(:name)
     expect(attributes[:name]).to be_a(String)
-
   end
 
   it "returns merchants sorted by creation date (newest first)" do
@@ -100,4 +99,19 @@ RSpec.describe "Merchants endpoints", type: :request do
     expect(merchants[1][:attributes][:name]).to eq("Test Merchant 2")
     expect(merchants[2][:attributes][:name]).to eq("Test Merchant 1")
   end
+
+  it "can update a merchant by id" do
+    previous_name = @merchant_1.name
+    merchant_params = { name: "Billy" }
+    headers = { "CONTENT_TYPE" => "application/json" }
+
+    patch "/api/v1/merchants/#{@merchant_1.id}", headers: headers, params: JSON.generate({ merchant: merchant_params })
+    
+    changed_merchant = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).to be_successful
+    expect(changed_merchant[:data][:attributes][:name]).to_not eq(previous_name)
+    expect(changed_merchant[:data][:attributes][:name]).to eq("Billy")
+  end
+
 end
