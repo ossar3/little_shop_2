@@ -33,10 +33,11 @@ RSpec.describe "Merchants endpoints", type: :request do
   end
 
   it "can destroy merchant" do
-    merchants = JSON.parse(response.body, symbolize_names: true)[:data]
+    merchants = Merchant.all
     expect(merchants.count).to eq(3)
     
-    delete "/api/v1/merchants/#{@item_2.id}"
+    
+    delete "/api/v1/merchants/#{@merchant_2.id}"
 
     expect(response).to be_successful 
     expect(response.status).to eq(204)

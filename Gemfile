@@ -35,6 +35,8 @@ group :development, :test do
   gem "simplecov"
   gem "rspec-rails"
   gem "shoulda-matchers"
+  gem 'pry'
+  gem 'pry-rails'
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
   gem "brakeman", require: false
 

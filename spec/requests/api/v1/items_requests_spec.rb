@@ -45,7 +45,7 @@ RSpec.describe "Item endpoints", type: :request do
   end
 
   it "can destroy items" do
-    items = JSON.parse(response.body, symbolize_names: true)[:data]
+    items = Item.all
     expect(items.count).to eq(3)
     
     delete "/api/v1/items/#{@item_2.id}"
