@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.2.1", ">= 7.2.1.1"
+gem "rails", "~> 7.1.3"
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
 # Use the Puma web server [https://github.com/puma/puma]
@@ -35,8 +35,7 @@ group :development, :test do
   gem "simplecov"
   gem "rspec-rails"
   gem "shoulda-matchers"
-  gem 'pry'
-  gem 'pry-rails'
+  gem "pry"
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
   gem "brakeman", require: false
 

@@ -56,4 +56,58 @@ RSpec.describe "Item endpoints", type: :request do
     expect(items.count).to eq(2)
   end
 
+  it "can create new items" do 
+    attributes = {
+      name: "chocolate bar",
+      description: "sweet and delicious",
+      unit_price: 3.99,
+      merchant_id: 1
+    }
+
+    post "/api/v1/items", params:{item: attributes}
+
+    item_new = JSON.parse(response.body, symbolize_names: true)
+
+    id = item_new[:data][:id]
+
+    get "/api/v1/items"
+
+    all_items = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).to have_http_status(200)
+    expect(item_new[:data][:attributes][:name]).to eq("chocolate bar")
+    
+  end
+  
+  it "can retrieve a single item by id" do
+    id = @item_1.id
+    get "/api/v1/items/#{id}"
+
+    item = JSON.parse(response.body, symbolize_names: true)
+   
+    expect(response.status).to eq(200)
+    expect(item).to have_key(:data)
+ 
+    expect(item[:data]).to have_key(:id)
+    expect(item[:data][:id]).to be_a(String)
+
+    expect(item[:data]).to have_key(:type)
+    expect(item[:data][:type]).to be_a(String)
+
+    expect(item[:data]).to have_key(:attributes)
+    attributes = item[:data][:attributes]
+    
+    expect(attributes).to have_key(:name)
+    expect(attributes[:name]).to be_a(String)
+
+    expect(attributes).to have_key(:description)
+    expect(attributes[:description]).to be_a(String)
+
+    expect(attributes).to have_key(:unit_price)
+    expect(attributes[:unit_price]).to be_a(Float)
+
+    expect(attributes).to have_key(:merchant_id)
+    expect(attributes[:merchant_id]).to be_a(Integer)
+  end
+
 end
