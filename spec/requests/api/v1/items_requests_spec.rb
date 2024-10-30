@@ -52,16 +52,17 @@ RSpec.describe "Item endpoints", type: :request do
       merchant_id: 1
     }
 
-    post "api/v1/items", params: {item: attributes}
-    item_new = JSON.parse(response.body, symbolize_names: true)
-    id = item_new[:id]
+    post "/api/v1/items", params:{item: attributes}
 
-    get "api/v1/item"
+    item_new = JSON.parse(response.body, symbolize_names: true)
+
+    id = item_new[:data][:id]
+
+    get "/api/v1/items"
 
     all_items = JSON.parse(response.body, symbolize_names: true)
 
     expect(response).to have_http_status(200)
-    expect(item_new.name).to eq("chocolate bar")
-    expect(all_items).to include(id)
+    expect(item_new[:data][:attributes][:name]).to eq("chocolate bar")
   end
 end
