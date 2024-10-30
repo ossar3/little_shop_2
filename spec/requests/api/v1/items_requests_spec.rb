@@ -43,4 +43,17 @@ RSpec.describe "Item endpoints", type: :request do
       expect(attributes[:merchant_id]).to be_a(Integer)
     end
   end
+
+  it "can destroy items" do
+    items = JSON.parse(response.body, symbolize_names: true)[:data]
+    expect(items.count).to eq(3)
+    
+    delete "/api/v1/items/#{@item_2.id}"
+
+    expect(response).to be_successful 
+    expect(response.status).to eq(204)
+
+    expect(items.count).to eq(2)
+  end
+
 end
