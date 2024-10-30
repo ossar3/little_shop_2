@@ -44,6 +44,18 @@ RSpec.describe "Item endpoints", type: :request do
     end
   end
 
+  it "can destroy items" do
+    items = Item.all
+    expect(items.count).to eq(3)
+    
+    delete "/api/v1/items/#{@item_2.id}"
+
+    expect(response).to be_successful 
+    expect(response.status).to eq(204)
+
+    expect(items.count).to eq(2)
+  end
+
   it "can create new items" do 
     attributes = {
       name: "chocolate bar",
@@ -65,7 +77,7 @@ RSpec.describe "Item endpoints", type: :request do
     expect(response).to have_http_status(200)
     expect(item_new[:data][:attributes][:name]).to eq("chocolate bar")
     
-    end
+  end
   
   it "can retrieve a single item by id" do
     id = @item_1.id
@@ -97,4 +109,5 @@ RSpec.describe "Item endpoints", type: :request do
     expect(attributes).to have_key(:merchant_id)
     expect(attributes[:merchant_id]).to be_a(Integer)
   end
+
 end

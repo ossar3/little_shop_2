@@ -4,7 +4,7 @@ RSpec.describe "Merchants endpoints", type: :request do
   before(:each) do
     @merchant_1 = Merchant.create!(name: "Test Merchant 1", created_at: 3.seconds.ago)
     @merchant_2 = Merchant.create!(name: "Test Merchant 2", created_at: 2.seconds.ago)
-    @merchant_3 = Merchant.create!(name: "Test Merchant 3", created_at: 1.seconds.ago)
+    @merchant_3 = Merchant.create!(name: "Test Merchant 3", created_at: 1.seconds.ago)    
   end
 
   it "can retrieve ALL merchants" do
@@ -32,7 +32,19 @@ RSpec.describe "Merchants endpoints", type: :request do
     end
   end
 
+  it "can destroy merchant" do
+    merchants = Merchant.all
+    expect(merchants.count).to eq(3)
+    
+    
+    delete "/api/v1/merchants/#{@merchant_2.id}"
 
+    expect(response).to be_successful 
+    expect(response.status).to eq(204)
+
+    expect(merchants.count).to eq(2)
+  end
+  
   it "can create new merchants" do 
     attributes = {
       name: "the chocolate bar guy",
@@ -52,7 +64,7 @@ RSpec.describe "Merchants endpoints", type: :request do
     expect(merchant_new[:data][:attributes][:name]).to eq("the chocolate bar guy")
     expect(all_merchants[:data]).to include(id)
 
-    end
+  end
   
   it "can retrieve a single merchant by id" do
     id = @merchant_1.id
