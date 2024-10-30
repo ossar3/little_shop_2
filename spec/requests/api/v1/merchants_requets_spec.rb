@@ -32,6 +32,28 @@ RSpec.describe "Merchants endpoints", type: :request do
     end
   end
 
+
+  it "can create new merchants" do 
+    attributes = {
+      name: "the chocolate bar guy",
+    }
+
+    post "/api/v1/merchants", params:{merchant: attributes}
+
+    merchant_new = JSON.parse(response.body, symbolize_names: true)
+
+    id = merchant_new[:data]
+
+    get "/api/v1/merchants"
+
+    all_merchants = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).to have_http_status(200)
+    expect(merchant_new[:data][:attributes][:name]).to eq("the chocolate bar guy")
+    expect(all_merchants[:data]).to include(id)
+
+    end
+  
   it "can retrieve a single merchant by id" do
     id = @merchant_1.id
     get "/api/v1/merchants/#{id}"
@@ -52,5 +74,6 @@ RSpec.describe "Merchants endpoints", type: :request do
 
     expect(attributes).to have_key(:name)
     expect(attributes[:name]).to be_a(String)
+
   end
 end
