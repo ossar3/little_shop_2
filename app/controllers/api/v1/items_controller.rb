@@ -19,7 +19,7 @@ end
 private 
 
 def item_params
-params.require(:item).permit( :merchant_id,:unit_price, :name, :description)
+    params.require(:item).permit( :merchant_id,:unit_price, :name, :description)
 end
 
 
