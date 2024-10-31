@@ -15,9 +15,9 @@ RSpec.describe Merchant, type: :model do
       @merchant_2 = Merchant.create!(name: "Test Merchant 1", created_at: 2.seconds.ago)
       @merchant_3 = Merchant.create!(name: "Test Merchant 3", created_at: 1.second.ago)
 
-      Item.create!(name: "Item 1", description: "Description 1", unit_price: 10.0, merchant: @merchant_1)
-      Item.create!(name: "Item 2", description: "Description 2", unit_price: 15.0, merchant: @merchant_1)
-      Item.create!(name: "Item 3", description: "Description 3", unit_price: 20.0, merchant: @merchant_2)
+      @item_1 = Item.create!(name: "Item 1", description: "Description 1", unit_price: 10.0, merchant: @merchant_1)
+      @item_2 = Item.create!(name: "Item 2", description: "Description 2", unit_price: 15.0, merchant: @merchant_1)
+      @item_3 = Item.create!(name: "Item 3", description: "Description 3", unit_price: 20.0, merchant: @merchant_2)
     end
 
     it "returns all merchants when no sorted parameter is provided" do
@@ -45,28 +45,29 @@ RSpec.describe Merchant, type: :model do
       expect(result[2].item_count).to eq(0) 
     end
 
+    it "returns the correct item count for each merchant" do
+      expect(@merchant_1.item_count).to eq(2) 
+      expect(@merchant_2.item_count).to eq(1) 
+      expect(@merchant_3.item_count).to eq(0) 
+    end
+    
     it "returns only merchants that have invoices with status 'returned' when ?status=returned is provided" do
 
+      customer = Customer.create!(first_name: "John", last_name: "Doe")
+      
       merchant_with_returned_invoice = Merchant.create!(name: "Merchant With Returned Invoice")
       merchant_without_returned_invoice = Merchant.create!(name: "Merchant Without Returned Invoice")
       another_merchant_with_returned_invoice = Merchant.create!(name: "Another Merchant With Returned Invoice")
-  
-      Invoice.create!(merchant: merchant_with_returned_invoice, status: "returned")
-      Invoice.create!(merchant: merchant_without_returned_invoice, status: "shipped")
-      Invoice.create!(merchant: another_merchant_with_returned_invoice, status: "returned")
-      Invoice.create!(merchant: merchant_without_returned_invoice, status: "completed")
-  
-      get "/api/v1/merchants?status=returned"
-  
-      expect(response).to be_successful
-      merchants = JSON.parse(response.body, symbolize_names: true)[:data]
 
-      expect(merchants.count).to eq(2)
-  
-      expect(merchants[0][:attributes][:name]).to eq("Merchant With Returned Invoice").or eq("Another Merchant With Returned Invoice")
-      expect(merchants[1][:attributes][:name]).to eq("Merchant With Returned Invoice").or eq("Another Merchant With Returned Invoice")
+      Invoice.create!(merchant: merchant_with_returned_invoice, customer: customer, status: "returned")
+      Invoice.create!(merchant: merchant_without_returned_invoice, customer: customer, status: "shipped")
+      Invoice.create!(merchant: another_merchant_with_returned_invoice, customer: customer, status: "returned")
+      Invoice.create!(merchant: merchant_without_returned_invoice, customer: customer, status: "completed")
+
+      result = Merchant.fetch_merchants({ status: 'returned' })
+
+      expect(result.count).to eq(2)
+      expect(result).to contain_exactly(merchant_with_returned_invoice, another_merchant_with_returned_invoice)
     end
-  end
-    
   end
 end

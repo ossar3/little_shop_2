@@ -34,7 +34,7 @@ class Merchant < ApplicationRecord
   def self.merchants_with_returns
     joins(:invoices).where(invoices: { status: "returned" }).distinct
   end
-
+  
   def item_count 
     self.items.count
   end

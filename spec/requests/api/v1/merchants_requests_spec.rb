@@ -4,7 +4,11 @@ RSpec.describe "Merchants endpoints", type: :request do
   before(:each) do
     @merchant_1 = Merchant.create!(name: "Test Merchant 1", created_at: 3.seconds.ago)
     @merchant_2 = Merchant.create!(name: "Test Merchant 2", created_at: 2.seconds.ago)
-    @merchant_3 = Merchant.create!(name: "Test Merchant 3", created_at: 1.seconds.ago)   
+    @merchant_3 = Merchant.create!(name: "Test Merchant 3", created_at: 1.seconds.ago) 
+
+    @item_1 = Item.create!(name: "Item 1", description: "Description 1", unit_price: 10.0, merchant: @merchant_1)
+    @item_2 = Item.create!(name: "Item 2", description: "Description 2", unit_price: 15.0, merchant: @merchant_1)
+    @item_3 = Item.create!(name: "Item 3", description: "Description 3", unit_price: 20.0, merchant: @merchant_2)
   end
 
   it "can retrieve ALL merchants" do
@@ -114,20 +118,20 @@ RSpec.describe "Merchants endpoints", type: :request do
     expect(changed_merchant[:data][:attributes][:name]).to eq("Billy")
   end
 
-  it "includes item_count in the response when count=true" do
-  
-    Item.create!(name: "Item 1", description: "Description 1", unit_price: 10.0, merchant: @merchant_1)
-    Item.create!(name: "Item 2", description: "Description 2", unit_price: 15.0, merchant: @merchant_1)
-    Item.create!(name: "Item 3", description: "Description 3", unit_price: 20.0, merchant: @merchant_2)
-  
+  it "includes the correct item_count in the response when count=true" do
     get "/api/v1/merchants?count=true"
   
     expect(response).to be_successful
+
     merchants = JSON.parse(response.body, symbolize_names: true)[:data]
-  
-    expect(merchants[0][:attributes][:item_count]).to eq(2) 
-    expect(merchants[1][:attributes][:item_count]).to eq(1) 
-    expect(merchants[2][:attributes][:item_count]).to eq(0) 
+
+    merchant_1_data = merchants.find { |merchant| merchant[:id] == @merchant_1.id.to_s }
+    merchant_2_data = merchants.find { |merchant| merchant[:id] == @merchant_2.id.to_s }
+    merchant_3_data = merchants.find { |merchant| merchant[:id] == @merchant_3.id.to_s }
+
+    expect(merchant_1_data[:attributes][:item_count]).to eq(2) 
+    expect(merchant_2_data[:attributes][:item_count]).to eq(1)
+    expect(merchant_3_data[:attributes][:item_count]).to eq(0) 
   end
 
   it "returns only merchants that have invoices with status 'returned'" do
