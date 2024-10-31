@@ -22,6 +22,10 @@ Rails.application.routes.draw do
   post "/api/v1/items", to: "api/v1/items#create"
   put "/api/v1/items/:id", to: "api/v1/items#update"
 
+#relationships
+  get "/api/v1/merchants/:id/items", to: "api/v1/merchant_items#index"
+  get "/api/v1/items/:id/merchant", to: "api/v1/item_merchants#index"
+
 #other 
 #  get "/api/v1/merchants/:id/items", to: "api/v1/item_merchants#index" #get items belonging to a specific merchant
 end
