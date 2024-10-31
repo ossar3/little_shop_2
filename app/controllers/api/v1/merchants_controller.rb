@@ -1,8 +1,8 @@
 class Api::V1::MerchantsController < ApplicationController    
 
     def index
-        merchants = Merchant.all
-        render json: MerchantSerializer.new(merchants)
+        merchants = Merchant.fetch_merchants(params)
+        render json: MerchantSerializer.new(merchants, { params: { count: params[:count], sorted: params[:sorted] } })
     end
 
     def show
@@ -32,6 +32,4 @@ class Api::V1::MerchantsController < ApplicationController
     def merchant_params
     params.require(:merchant).permit(:name)
     end
-
-   
 end

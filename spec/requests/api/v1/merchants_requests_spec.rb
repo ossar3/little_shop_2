@@ -4,7 +4,11 @@ RSpec.describe "Merchants endpoints", type: :request do
   before(:each) do
     @merchant_1 = Merchant.create!(name: "Test Merchant 1", created_at: 3.seconds.ago)
     @merchant_2 = Merchant.create!(name: "Test Merchant 2", created_at: 2.seconds.ago)
-    @merchant_3 = Merchant.create!(name: "Test Merchant 3", created_at: 1.seconds.ago)    
+    @merchant_3 = Merchant.create!(name: "Test Merchant 3", created_at: 1.seconds.ago) 
+
+    @item_1 = Item.create!(name: "Item 1", description: "Description 1", unit_price: 10.0, merchant: @merchant_1)
+    @item_2 = Item.create!(name: "Item 2", description: "Description 2", unit_price: 15.0, merchant: @merchant_1)
+    @item_3 = Item.create!(name: "Item 3", description: "Description 3", unit_price: 20.0, merchant: @merchant_2)
   end
 
   it "can retrieve ALL merchants" do
@@ -86,8 +90,20 @@ RSpec.describe "Merchants endpoints", type: :request do
 
     expect(attributes).to have_key(:name)
     expect(attributes[:name]).to be_a(String)
-
   end
+
+  it "returns merchants sorted by creation date (newest first)" do
+    get "/api/v1/merchants?sorted=age"
+
+    merchants = JSON.parse(response.body, symbolize_names: true)[:data]
+
+    expect(response).to be_successful
+
+    expect(merchants[0][:attributes][:name]).to eq("Test Merchant 3")
+    expect(merchants[1][:attributes][:name]).to eq("Test Merchant 2")
+    expect(merchants[2][:attributes][:name]).to eq("Test Merchant 1")
+  end
+
   it "can update a merchant by id" do
     previous_name = @merchant_1.name
     merchant_params = { name: "Billy" }
@@ -102,4 +118,42 @@ RSpec.describe "Merchants endpoints", type: :request do
     expect(changed_merchant[:data][:attributes][:name]).to eq("Billy")
   end
 
+  it "includes the correct item_count in the response when count=true" do
+    get "/api/v1/merchants?count=true"
+  
+    expect(response).to be_successful
+
+    merchants = JSON.parse(response.body, symbolize_names: true)[:data]
+
+    merchant_1_data = merchants.find { |merchant| merchant[:id] == @merchant_1.id.to_s }
+    merchant_2_data = merchants.find { |merchant| merchant[:id] == @merchant_2.id.to_s }
+    merchant_3_data = merchants.find { |merchant| merchant[:id] == @merchant_3.id.to_s }
+
+    expect(merchant_1_data[:attributes][:item_count]).to eq(2) 
+    expect(merchant_2_data[:attributes][:item_count]).to eq(1)
+    expect(merchant_3_data[:attributes][:item_count]).to eq(0) 
+  end
+
+  it "returns only merchants that have invoices with status 'returned'" do
+    customer = Customer.create!(first_name: "Gordon", last_name: "Ramsey")
+
+    merchant_with_returned_invoice = Merchant.create!(name: "Merchant With Returned Invoice")
+    merchant_without_returned_invoice = Merchant.create!(name: "Merchant Without Returned Invoice")
+    another_merchant_with_returned_invoice = Merchant.create!(name: "Another Merchant With Returned Invoice")
+
+    Invoice.create!(merchant: merchant_with_returned_invoice, customer: customer, status: "returned")
+    Invoice.create!(merchant: merchant_without_returned_invoice, customer: customer, status: "shipped")
+    Invoice.create!(merchant: another_merchant_with_returned_invoice, customer: customer, status: "returned")
+    Invoice.create!(merchant: merchant_without_returned_invoice, customer: customer, status: "completed")
+
+    get "/api/v1/merchants?status=returned"
+
+    expect(response).to be_successful
+    merchants = JSON.parse(response.body, symbolize_names: true)[:data]
+
+    expect(merchants.count).to eq(2)
+      
+    returned_merchant_names = merchants.map { |merchant| merchant[:attributes][:name] }
+    expect(returned_merchant_names).to contain_exactly("Merchant With Returned Invoice", "Another Merchant With Returned Invoice")
+  end
 end
