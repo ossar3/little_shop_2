@@ -1,7 +1,7 @@
 class Api::V1::ItemsController < ApplicationController
 
     def index
-        items = Item.all
+        items = fetch_items
         render json: ItemSerializer.new(items)
     end
 
@@ -28,6 +28,10 @@ class Api::V1::ItemsController < ApplicationController
 
 
     private 
+
+    def fetch_items
+        params[:sorted].presence == 'price' ? Item.sorted_by_price : Item.all
+    end
 
     def item_params
         params.require(:item).permit( :merchant_id,:unit_price, :name, :description)
