@@ -5,10 +5,37 @@ class Merchant < ApplicationRecord
   validates :name, presence: true
 
   def self.fetch_merchants(params)
-    if params[:sorted] == 'age'
-      order(created_at: :desc)
+    merchants = sort_and_filter(params)
+    merchants = merchants_with_item_counts(merchants) if params[:count] == 'true'
+    merchants
+  end
+
+  def self.sort_and_filter(params)
+    if params[:status] == "returned"
+      merchants_with_returns
+    elsif params[:sorted] == "age"
+      sort
     else
       all
     end
+  end
+
+  def self.merchants_with_item_counts(merchants)
+    merchants.map do |merchant|
+      merchant.define_singleton_method(:item_count) { merchant.items.size }
+      merchant
+    end
+  end
+
+  def self.sort
+    order(created_at: :desc)
+  end
+
+  def self.merchants_with_returns
+    joins(:invoices).where(invoices: { status: "returned" }).distinct
+  end
+
+  def item_count 
+    self.items.count
   end
 end
