@@ -23,5 +23,5 @@ Rails.application.routes.draw do
   put "/api/v1/items/:id", to: "api/v1/items#update"
 
 #other 
- get "/api/v1/merchants/:id/items", to: "api/v1/item_merchants#index" #get items belonging to a specific merchant
+#  get "/api/v1/merchants/:id/items", to: "api/v1/item_merchants#index" #get items belonging to a specific merchant
 end

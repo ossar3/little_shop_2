@@ -124,7 +124,18 @@ RSpec.describe "Item endpoints", type: :request do
     expect(changed_item[:data][:attributes][:description]).to eq("is successful")
     expect(changed_item[:data][:attributes][:unit_price]).to eq(9.99)
     expect(changed_item[:data][:attributes][:merchant_id]).to eq(@merchant_2.id)
-
   end
 
+  it "returns all items by price(low to high)" do 
+    
+    get "/api/v1/items?sorted=price" 
+
+    items = JSON.parse(response.body, symbolize_names: true)[:data]
+
+    expect(response).to be_successful
+
+    prices = items.map { |item| item[:attributes][:unit_price] }
+    expect(prices).to eq(prices.sort)
+
+  end
 end
