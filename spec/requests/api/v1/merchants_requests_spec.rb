@@ -156,4 +156,43 @@ RSpec.describe "Merchants endpoints", type: :request do
     returned_merchant_names = merchants.map { |merchant| merchant[:attributes][:name] }
     expect(returned_merchant_names).to contain_exactly("Merchant With Returned Invoice", "Another Merchant With Returned Invoice")
   end
+
+  describe "GET /api/v1/merchants/:id" do
+    it "returns a 404 error when the merchant does not exist" do
+      get "/api/v1/merchants/9999" 
+
+      expect(response).to have_http_status(:not_found)
+
+      json_response = JSON.parse(response.body, symbolize_names: true)
+      expect(json_response[:errors]).to be_an(Array)
+      expect(json_response[:errors][0][:status]).to eq("404")
+      expect(json_response[:errors][0][:title]).to eq("Couldn't find Merchant with 'id'=9999")
+    end
+  end
+  
+  describe "PATCH /api/v1/merchants/:id" do
+    it "returns a 404 error when the merchant does not exist" do
+      patch "/api/v1/merchants/9999", params: { merchant: { name: "Mrs. Potato Head" } }
+
+      expect(response).to have_http_status(:not_found)
+
+      json_response = JSON.parse(response.body, symbolize_names: true)
+      expect(json_response[:errors]).to be_an(Array)
+      expect(json_response[:errors][0][:status]).to eq("404")
+      expect(json_response[:errors][0][:title]).to eq("Couldn't find Merchant with 'id'=9999")
+    end
+  end
+
+  describe "DELETE /api/v1/merchants/:id" do
+    it "returns a 404 error when a merchant does not exist to delete" do
+      delete "/api/v1/merchants/9999" 
+
+      expect(response).to have_http_status(:not_found)
+
+      json_response = JSON.parse(response.body, symbolize_names: true)
+      expect(json_response[:errors]).to be_an(Array)
+      expect(json_response[:errors][0][:status]).to eq("404")
+      expect(json_response[:errors][0][:title]).to eq("Couldn't find Merchant with 'id'=9999")
+    end
+  end
 end
