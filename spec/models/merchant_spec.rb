@@ -53,7 +53,7 @@ RSpec.describe Merchant, type: :model do
     
     it "returns only merchants that have invoices with status 'returned' when ?status=returned is provided" do
 
-      customer = Customer.create!(first_name: "John", last_name: "Doe")
+      customer = Customer.create!(first_name: "Mister", last_name: "Rogers")
       
       merchant_with_returned_invoice = Merchant.create!(name: "Merchant With Returned Invoice")
       merchant_without_returned_invoice = Merchant.create!(name: "Merchant Without Returned Invoice")
@@ -68,6 +68,26 @@ RSpec.describe Merchant, type: :model do
 
       expect(result.count).to eq(2)
       expect(result).to contain_exactly(merchant_with_returned_invoice, another_merchant_with_returned_invoice)
+    end
+
+    it "is invalid without a name" do
+      merchant = Merchant.new(name: nil)
+      expect(merchant).to_not be_valid
+      expect(merchant.errors[:name]).to include("can't be blank")
+    end
+
+    it "returns a count of zero for merchants with no items" do
+      merchant = Merchant.create!(name: "No Item Merchant")
+      expect(merchant.item_count).to eq(0)
+    end
+
+    it "returns an empty array when no merchants are found" do
+      Item.delete_all
+      Merchant.delete_all
+      result = Merchant.fetch_merchants({}).to_a
+    
+      expect(result).to be_an(Array)
+      expect(result).to be_empty
     end
   end
 end
