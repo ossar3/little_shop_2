@@ -26,4 +26,11 @@ RSpec.describe"merchant invoices endpoints:", type: :request do
         expect(invoices[:data].length).to eq(0)
     end
 
+    it 'can get all invoices of a status' do
+        get "/api/v1/merchants/#{@merchant_1.id}/invoices?status=shipped"
+        expect(response.status).to eq(200)
+
+        invoices = JSON.parse(response.body, symbolize_names: true)
+        expect(invoices[:data].length).to eq(1)
+    end
 end
