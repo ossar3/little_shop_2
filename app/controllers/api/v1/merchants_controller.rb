@@ -1,13 +1,20 @@
 class Api::V1::MerchantsController < ApplicationController    
 
     def index
-        merchants = Merchant.all
-        render json: MerchantSerializer.new(merchants)
+        merchants = Merchant.fetch_merchants(params)
+        render json: MerchantSerializer.new(merchants, { params: { count: params[:count], sorted: params[:sorted] } })
     end
 
     def show
         merchant = Merchant.find(params[:id])
         render json: MerchantSerializer.new(merchant)
+    end
+    
+    def update
+        merchant = Merchant.find(params[:id])
+        if merchant.update(merchant_params)
+            render json: MerchantSerializer.new(merchant), status: :ok
+        end
     end
 
     def destroy

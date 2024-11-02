@@ -1,0 +1,3 @@
+class Api::V1::InvoiceCustomersController < ApplicationController
+    
+end
