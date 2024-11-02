@@ -12,7 +12,7 @@ RSpec.describe Merchant, type: :model do
   describe '.fetch_merchants' do
     before(:each) do
       @merchant_1 = Merchant.create!(name: "Test Merchant 1", created_at: 3.seconds.ago)
-      @merchant_2 = Merchant.create!(name: "Test Merchant 1", created_at: 2.seconds.ago)
+      @merchant_2 = Merchant.create!(name: "Test Merchant 2", created_at: 2.seconds.ago)
       @merchant_3 = Merchant.create!(name: "Test Merchant 3", created_at: 1.second.ago)
 
       @item_1 = Item.create!(name: "Item 1", description: "Description 1", unit_price: 10.0, merchant: @merchant_1)
