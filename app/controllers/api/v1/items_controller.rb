@@ -27,6 +27,16 @@ rescue_from ActiveRecord::RecordNotFound, with: :not_found_error_response
         render json: ItemSerializer.new(item)
     end
 
+    def find_all
+        if params[:name].present? && (params[:min_price].present? || params[:max_price].present?)
+            render json: {
+                error: "Cannot have name and price parameters"
+            }
+        end
+        
+        items = Item.find_all_items(params)
+        render json: ItemSerializer.new(items)
+    end
 
     private 
 
