@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
 #merchants below
   get "/api/v1/merchants", to: "api/v1/merchants#index"
+   get "/api/v1/merchants/find", to: "api/v1/merchants#find_one"
   get "/api/v1/merchants/:id", to: "api/v1/merchants#show"
   delete "/api/v1/merchants/:id", to: "api/v1/merchants#destroy"
   post "/api/v1/merchants", to: "api/v1/merchants#create"
@@ -20,6 +21,7 @@ Rails.application.routes.draw do
 
 #items below
   get "/api/v1/items", to: "api/v1/items#index"
+   get "/api/v1/items/find_all", to: "api/v1/items#find_all"
   get "/api/v1/items/:id", to: "api/v1/items#show"
   delete "/api/v1/items/:id", to: "api/v1/items#destroy"
   post "/api/v1/items", to: "api/v1/items#create"

@@ -27,6 +27,10 @@ rescue_from ActiveRecord::RecordNotFound, with: :not_found_error_response
         render json: MerchantSerializer.new(merchant)
     end  
 
+    def find_one
+        merchant = Merchant.find_one_by_name(params)
+        render json: MerchantSerializer.new(merchant)
+    end
 
     private
         
