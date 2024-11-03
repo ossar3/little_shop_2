@@ -4,7 +4,7 @@ RSpec.describe "Merchants endpoints", type: :request do
   before(:each) do
     @merchant_1 = Merchant.create!(name: "Test Merchant 1", created_at: 3.seconds.ago)
     @merchant_2 = Merchant.create!(name: "Test Merchant 2", created_at: 2.seconds.ago)
-    @merchant_3 = Merchant.create!(name: "Test Merchant 3", created_at: 1.seconds.ago) 
+    @merchant_3 = Merchant.create!(name: "Test Merchant 3", created_at: 1.seconds.ago)
 
     @item_1 = Item.create!(name: "Item 1", description: "Description 1", unit_price: 10.0, merchant: @merchant_1)
     @item_2 = Item.create!(name: "Item 2", description: "Description 2", unit_price: 15.0, merchant: @merchant_1)
@@ -193,6 +193,20 @@ RSpec.describe "Merchants endpoints", type: :request do
       expect(json_response[:errors]).to be_an(Array)
       expect(json_response[:errors][0][:status]).to eq("404")
       expect(json_response[:errors][0][:title]).to eq("Couldn't find Merchant with 'id'=9999")
+    end
+  end
+
+  describe "find one MERCHANT based on search criteria" do
+    it 'returns one merchant based on name criteria' do
+          @merchant_4 = Merchant.create!(name: "a Test Merchant 4", created_at: 1.seconds.ago) 
+      get "/api/v1/merchants/find?name=tEst"
+
+      found_merchant = JSON.parse(response.body, symbolize_names: true)
+ 
+      expect(response).to be_successful
+      expect(found_merchant.count).to eq(1)
+      expect(found_merchant).to be_an(Hash)
+      expect(found_merchant[:data][:attributes][:name]).to eq("a Test Merchant 4")
     end
   end
 end

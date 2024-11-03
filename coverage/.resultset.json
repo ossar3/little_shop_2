@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/terramanning/home/turing_work/2.5mod/little_shop/config/environment.rb": {
+      "/Users/devlin/Desktop/turing_work/2mod/little_shop/config/environment.rb": {
         "lines": [
           null,
           1,
@@ -10,7 +10,7 @@
           1
         ]
       },
-      "/Users/terramanning/home/turing_work/2.5mod/little_shop/config/application.rb": {
+      "/Users/devlin/Desktop/turing_work/2mod/little_shop/config/application.rb": {
         "lines": [
           1,
           null,
@@ -58,7 +58,7 @@
           null
         ]
       },
-      "/Users/terramanning/home/turing_work/2.5mod/little_shop/config/boot.rb": {
+      "/Users/devlin/Desktop/turing_work/2mod/little_shop/config/boot.rb": {
         "lines": [
           1,
           null,
@@ -66,7 +66,7 @@
           1
         ]
       },
-      "/Users/terramanning/home/turing_work/2.5mod/little_shop/config/environments/test.rb": {
+      "/Users/devlin/Desktop/turing_work/2mod/little_shop/config/environments/test.rb": {
         "lines": [
           1,
           null,
@@ -137,7 +137,7 @@
           null
         ]
       },
-      "/Users/terramanning/home/turing_work/2.5mod/little_shop/config/initializers/cors.rb": {
+      "/Users/devlin/Desktop/turing_work/2mod/little_shop/config/initializers/cors.rb": {
         "lines": [
           null,
           null,
@@ -157,7 +157,7 @@
           null
         ]
       },
-      "/Users/terramanning/home/turing_work/2.5mod/little_shop/config/initializers/filter_parameter_logging.rb": {
+      "/Users/devlin/Desktop/turing_work/2mod/little_shop/config/initializers/filter_parameter_logging.rb": {
         "lines": [
           null,
           null,
@@ -169,7 +169,7 @@
           null
         ]
       },
-      "/Users/terramanning/home/turing_work/2.5mod/little_shop/config/initializers/inflections.rb": {
+      "/Users/devlin/Desktop/turing_work/2mod/little_shop/config/initializers/inflections.rb": {
         "lines": [
           null,
           null,
@@ -189,7 +189,7 @@
           null
         ]
       },
-      "/Users/terramanning/home/turing_work/2.5mod/little_shop/config/routes.rb": {
+      "/Users/devlin/Desktop/turing_work/2mod/little_shop/config/routes.rb": {
         "lines": [
           1,
           null,
@@ -207,11 +207,13 @@
           1,
           1,
           1,
+          1,
           null,
           null,
           1,
           null,
           null,
+          1,
           1,
           1,
           1,
@@ -225,213 +227,7 @@
           null
         ]
       },
-      "/Users/terramanning/home/turing_work/2.5mod/little_shop/app/models/customer.rb": {
-        "lines": [
-          1,
-          1,
-          null,
-          1,
-          null
-        ]
-      },
-      "/Users/terramanning/home/turing_work/2.5mod/little_shop/app/models/application_record.rb": {
-        "lines": [
-          1,
-          1,
-          null
-        ]
-      },
-      "/Users/terramanning/home/turing_work/2.5mod/little_shop/spec/models/invoice_items_spec.rb": {
-        "lines": [
-
-        ]
-      },
-      "/Users/terramanning/home/turing_work/2.5mod/little_shop/spec/models/invoice_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          2,
-          2,
-          null,
-          null,
-          1,
-          2,
-          null,
-          null
-        ]
-      },
-      "/Users/terramanning/home/turing_work/2.5mod/little_shop/app/models/invoice.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          1,
-          null
-        ]
-      },
-      "/Users/terramanning/home/turing_work/2.5mod/little_shop/spec/models/item_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          2,
-          null,
-          null,
-          1,
-          2,
-          2,
-          2,
-          null,
-          null,
-          1,
-          1,
-          1,
-          null,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          1,
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null
-        ]
-      },
-      "/Users/terramanning/home/turing_work/2.5mod/little_shop/app/models/item.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
-          2,
-          null,
-          null
-        ]
-      },
-      "/Users/terramanning/home/turing_work/2.5mod/little_shop/spec/models/merchant_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          2,
-          null,
-          null,
-          1,
-          2,
-          null,
-          null,
-          1,
-          1,
-          8,
-          8,
-          8,
-          null,
-          8,
-          8,
-          8,
-          null,
-          null,
-          1,
-          1,
-          null,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          null,
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          null,
-          1,
-          null,
-          1,
-          1,
-          1,
-          null,
-          1,
-          1,
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          null,
-          1,
-          1,
-          null,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/terramanning/home/turing_work/2.5mod/little_shop/app/models/merchant.rb": {
+      "/Users/devlin/Desktop/turing_work/2mod/little_shop/app/models/merchant.rb": {
         "lines": [
           1,
           1,
@@ -473,27 +269,68 @@
           1,
           4,
           null,
-          null
-        ]
-      },
-      "/Users/terramanning/home/turing_work/2.5mod/little_shop/spec/models/transaction_spec.rb": {
-        "lines": [
-          1,
           null,
           1,
           1,
-          2,
-          null,
-          null,
           1,
-          2,
-          2,
           null,
           null
         ]
       },
-      "/Users/terramanning/home/turing_work/2.5mod/little_shop/app/models/transaction.rb": {
+      "/Users/devlin/Desktop/turing_work/2mod/little_shop/app/models/application_record.rb": {
         "lines": [
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/devlin/Desktop/turing_work/2mod/little_shop/app/models/item.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/devlin/Desktop/turing_work/2mod/little_shop/app/models/customer.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          null
+        ]
+      },
+      "/Users/devlin/Desktop/turing_work/2mod/little_shop/app/models/invoice.rb": {
+        "lines": [
+          1,
+          1,
+          1,
           1,
           1,
           null,
@@ -502,6 +339,6 @@
         ]
       }
     },
-    "timestamp": 1730575775
+    "timestamp": 1730648364
   }
 }

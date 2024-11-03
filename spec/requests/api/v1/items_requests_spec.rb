@@ -166,5 +166,17 @@ RSpec.describe "Item endpoints", type: :request do
   
     expect(response.status).to eq(404)
     expect(error_response[:message]).to eq("your query could not be completed")
-  end  
+  end
+
+  # describe "find all ITEMS based on search criteria" do
+  #   before(:each) do
+  #     @item_4 = Item.create!(name: "An Item 4", description: "Description 4", unit_price: 20.0, merchant: @merchant_3)
+  #   end
+  #   it 'returns items based on name criteria' do
+  #      get "/api/v1/items/find_all"
+      
+
+  #   end
+  # end
+
 end
