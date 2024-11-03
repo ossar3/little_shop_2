@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   put "/api/v1/items/:id", to: "api/v1/items#update"
 
 #customers below
-  get "/api/v1/merchants/:id/customers", to: "api/v1/customers#show"
+  get "/api/v1/merchants/:id/customers", to: "api/v1/merchant_customers#index"
 
 #relationships
   get "/api/v1/merchants/:id/items", to: "api/v1/merchant_items#index"
