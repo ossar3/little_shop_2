@@ -209,4 +209,29 @@ RSpec.describe "Merchants endpoints", type: :request do
       expect(found_merchant[:data][:attributes][:name]).to eq("a Test Merchant 4")
     end
   end
+
+  describe "POST /api/v1/merchants", type: :request do
+    it "returns a 400 error with bad request response" do
+
+      post "/api/v1/merchants", params: {}
+  
+      expect(response).to have_http_status(:bad_request)
+  
+      json_response = JSON.parse(response.body, symbolize_names: true)
+      expect(json_response[:message]).to eq("your query could not be completed")
+      expect(json_response[:errors]).to be_an(Array)
+      expect(json_response[:errors][0][:status]).to eq("400")
+      expect(json_response[:errors][0][:title]).to include("param is missing")
+    end
+  end 
+
+  describe "POST /api/v1/merchants with invalid JSON", type: :request do
+    it "returns a 400 error for invalid JSON format" do
+      post "/api/v1/merchants", params: "{ invalid json", headers: { "CONTENT_TYPE" => "application/json" }
+  
+      expect(response).to have_http_status(:bad_request)
+      json_response = JSON.parse(response.body, symbolize_names: true)
+      expect(json_response[:errors][0][:title]).to eq("Invalid JSON format")
+    end
+  end
 end
