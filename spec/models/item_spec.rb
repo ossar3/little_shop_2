@@ -25,7 +25,7 @@ RSpec.describe Item, type: :model do
       expected = [@item_3, @item_1, @item_4, @item_2]
       expect(Item.sorted_by_price).to eq(expected)
     end
-  end
+  
 
   it "returns an empty array when no items are present" do 
     Item.delete_all
@@ -37,4 +37,38 @@ RSpec.describe Item, type: :model do
     expect(item).to_not be_valid
     expect(item.errors[:merchant]).to include("must exist")
   end
+
+  it 'can find all items by name' do
+    result = Item.find_all_items({name: 'ON' })
+
+    expect(result.count).to eq(3)
+    expect(result[0]).to eq(@item_4)
+    expect(result[1]).to eq(@item_1)
+    expect(result[2]).to eq(@item_3)
+  end
+
+  it 'can find all items by min_price' do
+    result = Item.find_all_items({min_price:120})
+
+    expect(result.count).to eq(2)
+    expect(result[0]).to eq(@item_4)
+    expect(result[1]).to eq(@item_2)
+  end
+
+  it 'can find all items by max_price' do
+    result = Item.find_all_items({max_price:110})
+
+    expect(result.count).to eq(2)
+    expect(result[0]).to eq(@item_1)
+    expect(result[1]).to eq(@item_3)
+  end
+  it 'can find all items by min and max price' do
+    result = Item.find_all_items({min_price:5,max_price:400})
+
+    expect(result.count).to eq(3)
+    expect(result[0]).to eq(@item_4)
+    expect(result[1]).to eq(@item_1)
+    expect(result[2]).to eq(@item_3)
+  end
+end
 end

@@ -94,7 +94,7 @@ RSpec.describe Merchant, type: :model do
   describe "find one MERCHANT based on search criteria" do
     it 'returns one merchant based on name criteria' do
           @merchant_4 = Merchant.create!(name: "a Test Merchant 4", created_at: 1.seconds.ago) 
-      result = Merchant.find_one_by_name(name: 'tEst' )
+      result = Merchant.find_one_by_name({name: 'tEst'})
 
       expect(result).to eq(@merchant_4)
     end

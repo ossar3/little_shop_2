@@ -168,15 +168,55 @@ RSpec.describe "Item endpoints", type: :request do
     expect(error_response[:message]).to eq("your query could not be completed")
   end
 
-  # describe "find all ITEMS based on search criteria" do
-  #   before(:each) do
-  #     @item_4 = Item.create!(name: "An Item 4", description: "Description 4", unit_price: 20.0, merchant: @merchant_3)
-  #   end
-  #   it 'returns items based on name criteria' do
-  #      get "/api/v1/items/find_all"
-      
+  describe "find all ITEMS based on search criteria" do
+    it "can find all items by name" do
+      @item_4 = Item.create!(name: "a baking mat", description: "Description 4", unit_price: 20.0, merchant: @merchant_3)
 
-  #   end
-  # end
+       get "/api/v1/items/find_all?name=bAk"
+
+       items = JSON.parse(response.body, symbolize_names: true)
+
+       expect(response).to be_successful
+       expect(items).to be_an(Hash)
+       expect(items[:data].count).to eq(2)
+       expect(items[:data][0][:attributes][:name]).to eq(@item_4.name)
+       expect(items[:data][1][:attributes][:name]).to eq(@item_3.name)
+    end
+
+    it "can find items by min_price" do
+      get "/api/v1/items/find_all?min_price=50"
+
+      items = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to be_successful
+      expect(items).to be_an(Hash)
+      expect(items[:data].count).to eq(2)
+      expect(items[:data][0][:attributes][:name]).to eq(@item_2.name)
+      expect(items[:data][1][:attributes][:name]).to eq(@item_1.name)
+    end
+
+    it "can find items by max_price" do
+      get "/api/v1/items/find_all?max_price=200"
+
+      items = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to be_successful
+      expect(items).to be_an(Hash)
+      expect(items[:data].count).to eq(2)
+      expect(items[:data][0][:attributes][:name]).to eq(@item_1.name)
+      expect(items[:data][1][:attributes][:name]).to eq(@item_3.name)
+    end
+
+    it 'can find items by min and max price' do
+      get "/api/v1/items/find_all?max_price=200&min_price=21"
+
+      items = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to be_successful
+      expect(items).to be_an(Hash)
+      expect(items[:data].count).to eq(1)
+      expect(items[:data][0][:attributes][:name]).to eq(@item_1.name)
+    end
+  end
 
 end
