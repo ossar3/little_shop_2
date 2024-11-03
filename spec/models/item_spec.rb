@@ -26,4 +26,15 @@ RSpec.describe Item, type: :model do
       expect(Item.sorted_by_price).to eq(expected)
     end
   end
+
+  it "returns an empty array when no items are present" do 
+    Item.delete_all
+    expect(Item.sorted_by_price).to eq([])
+    end
+
+  it "is invalid without a merchant" do
+    item = Item.new(name: "No Merchant Item", description: "Has no merchant", unit_price: 50)
+    expect(item).to_not be_valid
+    expect(item.errors[:merchant]).to include("must exist")
+  end
 end

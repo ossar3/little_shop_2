@@ -1,4 +1,5 @@
 class Api::V1::ItemsController < ApplicationController
+rescue_from ActiveRecord::RecordNotFound, with: :not_found_error_response
 
     def index
         items = fetch_items
@@ -36,6 +37,10 @@ class Api::V1::ItemsController < ApplicationController
     def item_params
         params.require(:item).permit( :merchant_id,:unit_price, :name, :description)
     end
+
+    def not_found_error_response(error)
+        render json: ErrorSerializer.new(ErrorMessage.new(error.message, 404)).serialize_json, status: :not_found
+      end
 end
 
 

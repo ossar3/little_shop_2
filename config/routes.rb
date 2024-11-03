@@ -29,6 +29,4 @@ Rails.application.routes.draw do
   get "/api/v1/merchants/:id/items", to: "api/v1/merchant_items#index"
   get "/api/v1/items/:id/merchant", to: "api/v1/item_merchants#index"
 
-#other 
-#  get "/api/v1/merchants/:id/items", to: "api/v1/item_merchants#index" #get items belonging to a specific merchant
 end

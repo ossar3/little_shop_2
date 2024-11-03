@@ -136,6 +136,35 @@ RSpec.describe "Item endpoints", type: :request do
 
     prices = items.map { |item| item[:attributes][:unit_price] }
     expect(prices).to eq(prices.sort)
-
   end
+
+  it "returns a 404 error when trying to retrieve a non-existent item" do
+    get "/api/v1/items/99999" 
+  
+    error_response = JSON.parse(response.body, symbolize_names: true)
+  
+    expect(response.status).to eq(404)
+    expect(error_response[:message]).to eq("your query could not be completed")
+  end
+  
+  it "returns a 404 error when trying to update a non-existent item" do
+    item_params = { name: "Non-existent Item", description: "This won't work", unit_price: 1.99, merchant_id: @merchant_1.id }
+    headers = { "CONTENT_TYPE" => "application/json" }
+  
+    put "/api/v1/items/99999", headers: headers, params: JSON.generate({ item: item_params }) 
+  
+    error_response = JSON.parse(response.body, symbolize_names: true)
+  
+    expect(response.status).to eq(404)
+    expect(error_response[:message]).to eq("your query could not be completed")
+  end
+  
+  it "returns a 404 error when trying to delete a non-existent item" do
+    delete "/api/v1/items/99999" 
+  
+    error_response = JSON.parse(response.body, symbolize_names: true)
+  
+    expect(response.status).to eq(404)
+    expect(error_response[:message]).to eq("your query could not be completed")
+  end  
 end
