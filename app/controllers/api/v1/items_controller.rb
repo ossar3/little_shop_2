@@ -27,7 +27,7 @@ before_action :validate_find_params, only: [:find_all]
 
     def create
         item = Item.create!(item_params)
-        render json: ItemSerializer.new(item)
+        render json: ItemSerializer.new(item), status: :created
     end
 
     def find_all

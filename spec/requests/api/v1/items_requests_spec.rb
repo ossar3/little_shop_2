@@ -61,7 +61,7 @@ RSpec.describe "Item endpoints", type: :request do
       name: "chocolate bar",
       description: "sweet and delicious",
       unit_price: 3.99,
-      merchant_id: 1
+      merchant_id: @merchant_1.id
     }
 
     post "/api/v1/items", params:{item: attributes}
