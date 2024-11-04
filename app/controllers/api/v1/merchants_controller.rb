@@ -71,4 +71,17 @@ before_action :validate_name_param, only: [:find_one]
               status: :bad_request
         end
     end
+    def validate_name_param
+        if params[:name] == "" || params[:name].nil?
+            render json:    {
+                errors: [
+                  {
+                    status: "400",
+                    message: "Invalid parameters"
+                  }
+                ]
+              },
+              status: :bad_request
+        end
+    end
 end
