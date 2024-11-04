@@ -1,5 +1,7 @@
 class Api::V1::MerchantsController < ApplicationController   
 rescue_from ActiveRecord::RecordNotFound, with: :not_found_error_response
+rescue_from ActionController::ParameterMissing, with: :bad_request_error_response
+rescue_from ActionDispatch::Http::Parameters::ParseError, with: :handle_parse_error
 
     def index
         merchants = Merchant.fetch_merchants(params)
@@ -35,11 +37,18 @@ rescue_from ActiveRecord::RecordNotFound, with: :not_found_error_response
     private
         
     def merchant_params
-    params.require(:merchant).permit(:name)
+        params.require(:merchant).permit(:name)
     end
 
     def not_found_error_response(error)
-        render json: ErrorSerializer.new(ErrorMessage.new(error.message, 404))
-        .serialize_json, status: :not_found
+        render json: ErrorSerializer.new(ErrorMessage.new(error.message, 404)).serialize_json, status: :not_found
+    end
+
+    def bad_request_error_response(error)
+        render json: ErrorSerializer.new(ErrorMessage.new(error.message, 400)).serialize_json, status: :bad_request
+    end
+
+    def handle_parse_error(error)
+        render json: ErrorSerializer.new(ErrorMessage.new("Invalid JSON format", 400)).serialize_json, status: :bad_request
     end
 end
