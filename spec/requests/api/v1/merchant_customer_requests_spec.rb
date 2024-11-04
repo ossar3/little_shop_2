@@ -33,6 +33,9 @@ RSpec.describe "Merchants customer endpoints", type: :request do
   end 
 
   it "can send request and recieve a response sad path" do
-    
+      get "/api/v1/merchants/145890000/customers"
+      expect(response).to have_http_status(404)
+      get "/api/v1/merchants/-145890000/customers"
+      expect(response).to have_http_status(404)
   end
 end
