@@ -5,6 +5,7 @@ class Item < ApplicationRecord
 
   validates :name, :description, :unit_price, presence: true
 
+
   def self.sorted_by_price
     order(:unit_price)
   end

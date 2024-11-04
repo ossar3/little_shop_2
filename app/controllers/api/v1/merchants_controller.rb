@@ -29,7 +29,6 @@ rescue_from ActiveRecord::RecordNotFound, with: :not_found_error_response
 
     def find_one
         merchant = Merchant.find_one_by_name(params)
-        #binding.pry
         if merchant.nil?
             render json:    
             { data: {}    

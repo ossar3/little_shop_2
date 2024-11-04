@@ -1,6 +1,6 @@
 class Api::V1::ItemsController < ApplicationController
 rescue_from ActiveRecord::RecordNotFound, with: :not_found_error_response
-
+before_action :validate_price_params, only: [:find_all]
     def index
         items = fetch_items
         render json: ItemSerializer.new(items)
@@ -28,14 +28,14 @@ rescue_from ActiveRecord::RecordNotFound, with: :not_found_error_response
     end
 
     def find_all
-        if params[:name].present? && (params[:min_price].present? || params[:max_price].present?)
-            render json: {
-                error: "Cannot have name and price parameters"
-            }
-        end
-        
         items = Item.find_all_items(params)
+        if items.nil?
+            render json:    
+            { data: {}    
+            }
+        else
         render json: ItemSerializer.new(items)
+        end
     end
 
     private 
@@ -50,7 +50,32 @@ rescue_from ActiveRecord::RecordNotFound, with: :not_found_error_response
 
     def not_found_error_response(error)
         render json: ErrorSerializer.new(ErrorMessage.new(error.message, 404)).serialize_json, status: :not_found
-      end
+    end
+
+    def validate_price_params
+        if (params[:max_price].present? && params[:max_price].to_f < 0)|| (params[:min_price].present? && params[:min_price].to_f < 0)
+            render json:    {
+                errors: [
+                  {
+                    status: "400",
+                    message: "Invalid parameters"
+                  }
+                ]
+              },
+              status: :bad_request
+        end
+        if params[:name].present? && (params[:min_price].present? || params[:max_price].present?)
+            render json:    {
+                errors: [
+                    {
+                    status: "400",
+                    message: "Invalid parameters"
+                    }
+                ]
+                },
+                status: :bad_request
+        end
+    end
 end
 
 
