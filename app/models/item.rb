@@ -14,7 +14,7 @@ class Item < ApplicationRecord
     name_input = params[:name]
     min_input = params[:min_price]
     max_input = params[:max_price]
-#binding.pry
+
     if params[:min_price].present? && params[:max_price].present?
         where("unit_price >= ? AND unit_price <= ?", min_input, max_input).order("LOWER(name)")
     elsif params[:min_price].present?
