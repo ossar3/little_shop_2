@@ -210,15 +210,16 @@ RSpec.describe "Merchants endpoints", type: :request do
     end
 
     it 'returns an empty array if there are no matches' do
-      get "/api/v1/merchants/find?name=xxxxxxx"
+       get "/api/v1/merchants/find?name=xxxxxxx"
 
-      merchant = JSON.parse(response.body, symbolize_names: true)
-
+       merchant = JSON.parse(response.body, symbolize_names: true)
+      
       expect(response).to be_successful
       
       expect(merchant).to be_an(Hash)
       expect(merchant[:data]).to eq({})
       expect(merchant).to eq({:data=>{}})
+    
     end
 
     it 'returns an error when name is not provided' do
