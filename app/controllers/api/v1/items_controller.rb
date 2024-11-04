@@ -55,6 +55,14 @@ before_action :validate_price_params, only: [:find_all]
         render json: ErrorSerializer.new(ErrorMessage.new(error.message, 404)).serialize_json, status: :not_found
     end
 
+    def bad_request_error_response(error)
+        render json: ErrorSerializer.new(ErrorMessage.new(error.message, 400)).serialize_json, status: :bad_request
+    end
+
+    def handle_parse_error(error)
+        render json: ErrorSerializer.new(ErrorMessage.new("Invalid JSON format", 400)).serialize_json, status: :bad_request
+    end
+
     def validate_price_params
         invalid_params = {
             errors: [

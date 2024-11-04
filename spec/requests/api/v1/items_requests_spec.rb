@@ -217,6 +217,26 @@ RSpec.describe "Item endpoints", type: :request do
       expect(items[:data].count).to eq(1)
       expect(items[:data][0][:attributes][:name]).to eq(@item_1.name)
     end
+
+    it 'can render an empty array if no matches' do
+      get "/api/v1/items/find_all?name=xxxxx"
+
+      items = JSON.parse(response.body, symbolize_names: true)
+  
+      expect(response).to be_successful
+      
+      expect(items).to be_an(Hash)
+      expect(items[:data]).to eq([])
+      expect(items).to eq({:data=>[]})
+    end
+
+    it 'can handle errors in the query' do
+      get "/api/v1/items/find_all?name="
+
+      items = JSON.parse(response.body, symbolize_names: true)
+      expect(response).to have_http_status(:bad_request)
+      expect(items[:errors][0][:status]).to eq("400")
+    end
   end
 
 
