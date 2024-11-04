@@ -65,7 +65,7 @@ RSpec.describe "Item endpoints", type: :request do
     }
 
     post "/api/v1/items", params:{item: attributes}
-
+  
     item_new = JSON.parse(response.body, symbolize_names: true)
 
     id = item_new[:data][:id]

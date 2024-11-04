@@ -2,7 +2,7 @@ class Api::V1::ItemsController < ApplicationController
 rescue_from ActiveRecord::RecordNotFound, with: :not_found_error_response
 rescue_from ActionController::ParameterMissing, with: :bad_request_error_response
 rescue_from ActionDispatch::Http::Parameters::ParseError, with: :handle_parse_error
-before_action :validate_price_params, only: [:find_all]
+before_action :validate_find_params, only: [:find_all]
 
     def index
         items = fetch_items
@@ -26,7 +26,7 @@ before_action :validate_price_params, only: [:find_all]
     end
 
     def create
-        item = Item.new(item_params)
+        item = Item.create!(item_params)
         render json: ItemSerializer.new(item)
     end
 
@@ -63,7 +63,7 @@ before_action :validate_price_params, only: [:find_all]
         render json: ErrorSerializer.new(ErrorMessage.new("Invalid JSON format", 400)).serialize_json, status: :bad_request
     end
 
-    def validate_price_params
+    def validate_find_params
         invalid_params = {
             errors: [
               {
