@@ -57,6 +57,7 @@ RSpec.describe "Item endpoints", type: :request do
   end
 
   it "can create new items" do 
+ 
     attributes = {
       name: "chocolate bar",
       description: "sweet and delicious",

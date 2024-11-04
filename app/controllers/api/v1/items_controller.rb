@@ -2,6 +2,7 @@ class Api::V1::ItemsController < ApplicationController
 rescue_from ActiveRecord::RecordNotFound, with: :not_found_error_response
 rescue_from ActionController::ParameterMissing, with: :bad_request_error_response
 rescue_from ActionDispatch::Http::Parameters::ParseError, with: :handle_parse_error
+rescue_from ActiveRecord::RecordInvalid, with: :unprocessable_entity_response
 
     def index
         items = fetch_items
@@ -61,6 +62,10 @@ rescue_from ActionDispatch::Http::Parameters::ParseError, with: :handle_parse_er
     def handle_parse_error(error)
         render json: ErrorSerializer.new(ErrorMessage.new("Invalid JSON format", 400)).serialize_json, status: :bad_request
     end
+
+    def unprocessable_entity_response(error)
+        render json: ErrorSerializer.new(ErrorMessage.new(error.message, 422)).serialize_json, status: :unprocessable_entity
+      end
 end
 
 
