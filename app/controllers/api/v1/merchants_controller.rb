@@ -1,6 +1,6 @@
 class Api::V1::MerchantsController < ApplicationController   
 rescue_from ActiveRecord::RecordNotFound, with: :not_found_error_response
-
+before_action :validate_name_param, only: [:find_one]
     def index
         merchants = Merchant.fetch_merchants(params)
         render json: MerchantSerializer.new(merchants, { params: { count: params[:count], sorted: params[:sorted] } })
@@ -47,5 +47,19 @@ rescue_from ActiveRecord::RecordNotFound, with: :not_found_error_response
     def not_found_error_response(error)
         render json: ErrorSerializer.new(ErrorMessage.new(error.message, 404))
         .serialize_json, status: :not_found
+    end
+
+    def validate_name_param
+        if params[:name] == "" || params[:name].nil?
+            render json:    {
+                errors: [
+                  {
+                    status: "400",
+                    message: "Invalid parameters"
+                  }
+                ]
+              },
+              status: :bad_request
+        end
     end
 end

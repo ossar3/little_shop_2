@@ -13,7 +13,7 @@
       <img src="./assets/0.13.1/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2024-11-03T10:50:54-07:00">2024-11-03T10:50:54-07:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2024-11-03T17:58:45-07:00">2024-11-03T17:58:45-07:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -22,14 +22,14 @@
     <span class="group_name">All Files</span>
     (<span class="covered_percent">
       <span class="green">
-  99.62%
+  98.34%
 </span>
 
      </span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         1.65
+         1.64
        </span>
     </span> hits/line
     )
@@ -42,11 +42,11 @@
   </div>
 
   <div class="t-line-summary">
-    <b>525</b> relevant lines,
-    <span class="green"><b>523</b> lines covered</span> and
-    <span class="red"><b>2</b> lines missed. </span>
+    <b>543</b> relevant lines,
+    <span class="green"><b>534</b> lines covered</span> and
+    <span class="red"><b>9</b> lines missed. </span>
     (<span class="green">
-  99.62%
+  98.34%
 </span>
 )
   </div>
@@ -82,12 +82,12 @@
         
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#996811a9f78d73daba031090170a63c854a4f77f" class="src_link" title="app/controllers/api/v1/items_controller.rb">app/controllers/api/v1/items_controller.rb</a></td>
-            <td class="green strong cell--number t-file__coverage">96.55 %</td>
-            <td class="cell--number">56</td>
-            <td class="cell--number">29</td>
-            <td class="cell--number">28</td>
-            <td class="cell--number">1</td>
-            <td class="cell--number">1.69</td>
+            <td class="yellow strong cell--number t-file__coverage">85.37 %</td>
+            <td class="cell--number">117</td>
+            <td class="cell--number">41</td>
+            <td class="cell--number">35</td>
+            <td class="cell--number">6</td>
+            <td class="cell--number">1.73</td>
             
           </tr>
         
@@ -104,12 +104,12 @@
         
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#14c22634dca7d8c281c33068621004f131d1ffb2" class="src_link" title="app/controllers/api/v1/merchants_controller.rb">app/controllers/api/v1/merchants_controller.rb</a></td>
-            <td class="green strong cell--number t-file__coverage">100.00 %</td>
-            <td class="cell--number">45</td>
-            <td class="cell--number">25</td>
-            <td class="cell--number">25</td>
-            <td class="cell--number">0</td>
-            <td class="cell--number">1.56</td>
+            <td class="green strong cell--number t-file__coverage">93.55 %</td>
+            <td class="cell--number">65</td>
+            <td class="cell--number">31</td>
+            <td class="cell--number">29</td>
+            <td class="cell--number">2</td>
+            <td class="cell--number">1.39</td>
             
           </tr>
         
@@ -182,7 +182,7 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#e26ff3d7c9f731e8ea7e677f6a853697fade13fc" class="src_link" title="app/models/item.rb">app/models/item.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
-            <td class="cell--number">28</td>
+            <td class="cell--number">29</td>
             <td class="cell--number">18</td>
             <td class="cell--number">18</td>
             <td class="cell--number">0</td>
@@ -542,8 +542,8 @@
   <div class="header">
     <h3>app/controllers/api/v1/items_controller.rb</h3>
     <h4>
-      <span class="green">
-  96.55%
+      <span class="yellow">
+  85.37%
 </span>
 
       lines covered
@@ -552,9 +552,9 @@
     
 
     <div class="t-line-summary">
-      <b>29</b> relevant lines.
-      <span class="green"><b>28</b> lines covered</span> and
-      <span class="red"><b>1</b> lines missed.</span>
+      <b>41</b> relevant lines.
+      <span class="green"><b>35</b> lines covered</span> and
+      <span class="red"><b>6</b> lines missed.</span>
     </div>
 
     
@@ -589,12 +589,14 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="3">
+          <li class="covered" data-hits="1" data-linenumber="3">
+            
+              <span class="hits">1</span>
             
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">before_action :validate_price_params, only: [:find_all]</code>
           </li>
         </div>
       
@@ -908,27 +910,29 @@
 
             
 
-            <code class="ruby">        if params[:name].present? &amp;&amp; (params[:min_price].present? || params[:max_price].present?)</code>
+            <code class="ruby">        items = Item.find_all_items(params)</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="32">
+          <li class="covered" data-hits="4" data-linenumber="32">
+            
+              <span class="hits">4</span>
             
 
             
 
-            <code class="ruby">            render json: {</code>
+            <code class="ruby">        if items.nil?</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="33">
+          <li class="missed" data-hits="0" data-linenumber="33">
             
 
             
 
-            <code class="ruby">                error: &quot;Cannot have name and price parameters&quot;</code>
+            <code class="ruby">            render json:    </code>
           </li>
         </div>
       
@@ -938,7 +942,7 @@
 
             
 
-            <code class="ruby">            }</code>
+            <code class="ruby">            { data: {}    </code>
           </li>
         </div>
       
@@ -948,7 +952,7 @@
 
             
 
-            <code class="ruby">        end</code>
+            <code class="ruby">            }</code>
           </li>
         </div>
       
@@ -958,7 +962,7 @@
 
             
 
-            <code class="ruby">        </code>
+            <code class="ruby">        else</code>
           </li>
         </div>
       
@@ -970,19 +974,17 @@
 
             
 
-            <code class="ruby">        items = Item.find_all_items(params)</code>
+            <code class="ruby">        render json: ItemSerializer.new(items)</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="4" data-linenumber="38">
-            
-              <span class="hits">4</span>
+          <li class="never" data-hits="" data-linenumber="38">
             
 
             
 
-            <code class="ruby">        render json: ItemSerializer.new(items)</code>
+            <code class="ruby">        end</code>
           </li>
         </div>
       
@@ -1146,7 +1148,7 @@
 
             
 
-            <code class="ruby">      end</code>
+            <code class="ruby">    end</code>
           </li>
         </div>
       
@@ -1156,12 +1158,594 @@
 
             
 
-            <code class="ruby">end</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="55">
+          <li class="covered" data-hits="1" data-linenumber="55">
+            
+              <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    def validate_price_params</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="56">
+            
+
+            
+
+            <code class="ruby">        #binding.pry</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="4" data-linenumber="57">
+            
+              <span class="hits">4</span>
+            
+
+            
+
+            <code class="ruby">        if (params[:max_price].present? &amp;&amp; params[:max_price].to_f &lt; 0)|| (params[:min_price].present? &amp;&amp; params[:min_price].to_f &lt; 0)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="58">
+            
+
+            
+
+            <code class="ruby">            render json:    {</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="59">
+            
+
+            
+
+            <code class="ruby">                errors: [</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="60">
+            
+
+            
+
+            <code class="ruby">                  {</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="61">
+            
+
+            
+
+            <code class="ruby">                    status: &quot;400&quot;,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="62">
+            
+
+            
+
+            <code class="ruby">                    message: &quot;Invalid parameters&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="63">
+            
+
+            
+
+            <code class="ruby">                  }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="64">
+            
+
+            
+
+            <code class="ruby">                ]</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="65">
+            
+
+            
+
+            <code class="ruby">              },</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="66">
+            
+
+            
+
+            <code class="ruby">              status: :bad_request</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="67">
+            
+
+            
+
+            <code class="ruby">        end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="4" data-linenumber="68">
+            
+              <span class="hits">4</span>
+            
+
+            
+
+            <code class="ruby">        if params[:name].present? &amp;&amp; (params[:min_price].present? || params[:max_price].present?)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="69">
+            
+
+            
+
+            <code class="ruby">            render json:    {</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="70">
+            
+
+            
+
+            <code class="ruby">                errors: [</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="71">
+            
+
+            
+
+            <code class="ruby">                    {</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="72">
+            
+
+            
+
+            <code class="ruby">                    status: &quot;400&quot;,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="73">
+            
+
+            
+
+            <code class="ruby">                    message: &quot;Invalid parameters&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="74">
+            
+
+            
+
+            <code class="ruby">                    }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="75">
+            
+
+            
+
+            <code class="ruby">                ]</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="76">
+            
+
+            
+
+            <code class="ruby">                },</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="77">
+            
+
+            
+
+            <code class="ruby">                status: :bad_request</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="78">
+            
+
+            
+
+            <code class="ruby">        end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="4" data-linenumber="79">
+            
+              <span class="hits">4</span>
+            
+
+            
+
+            <code class="ruby">        if params[:max_price].present? &amp;&amp; params[:max_price] == &quot;&quot;  || params[:min_price].present? &amp;&amp; params[:min_price] == &quot;&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="80">
+            
+
+            
+
+            <code class="ruby">            render json:    {</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="81">
+            
+
+            
+
+            <code class="ruby">                errors: [</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="82">
+            
+
+            
+
+            <code class="ruby">                    {</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="83">
+            
+
+            
+
+            <code class="ruby">                    status: &quot;400&quot;,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="84">
+            
+
+            
+
+            <code class="ruby">                    message: &quot;Invalid parameters&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="85">
+            
+
+            
+
+            <code class="ruby">                    }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="86">
+            
+
+            
+
+            <code class="ruby">                ]</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="87">
+            
+
+            
+
+            <code class="ruby">                },</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="88">
+            
+
+            
+
+            <code class="ruby">                status: :bad_request</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="89">
+            
+
+            
+
+            <code class="ruby">        end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="4" data-linenumber="90">
+            
+              <span class="hits">4</span>
+            
+
+            
+
+            <code class="ruby">        if params[:max_price].nil? &amp;&amp; params[:min_price].nil? &amp;&amp; params[:name].nil? </code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="91">
+            
+
+            
+
+            <code class="ruby">            render json:    {</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="92">
+            
+
+            
+
+            <code class="ruby">                errors: [</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="93">
+            
+
+            
+
+            <code class="ruby">                    {</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="94">
+            
+
+            
+
+            <code class="ruby">                    status: &quot;400&quot;,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="95">
+            
+
+            
+
+            <code class="ruby">                    message: &quot;Invalid parameters&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="96">
+            
+
+            
+
+            <code class="ruby">                    }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="97">
+            
+
+            
+
+            <code class="ruby">                ]</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="98">
+            
+
+            
+
+            <code class="ruby">                },</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="99">
+            
+
+            
+
+            <code class="ruby">                status: :bad_request</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="100">
+            
+
+            
+
+            <code class="ruby">        end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="4" data-linenumber="101">
+            
+              <span class="hits">4</span>
+            
+
+            
+
+            <code class="ruby">        if params[:max_price].nil? &amp;&amp; params[:min_price].nil? &amp;&amp; params[:name] == &quot;&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="102">
+            
+
+            
+
+            <code class="ruby">            render json:    {</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="103">
+            
+
+            
+
+            <code class="ruby">                errors: [</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="104">
+            
+
+            
+
+            <code class="ruby">                    {</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="105">
+            
+
+            
+
+            <code class="ruby">                    status: &quot;400&quot;,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="106">
+            
+
+            
+
+            <code class="ruby">                    message: &quot;Invalid parameters&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="107">
+            
+
+            
+
+            <code class="ruby">                    }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="108">
+            
+
+            
+
+            <code class="ruby">                ]</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="109">
+            
+
+            
+
+            <code class="ruby">                },</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="110">
+            
+
+            
+
+            <code class="ruby">                status: :bad_request</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="111">
+            
+
+            
+
+            <code class="ruby">        end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="112">
             
 
             
@@ -1171,7 +1755,47 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="56">
+          <li class="never" data-hits="" data-linenumber="113">
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="114">
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="115">
+            
+
+            
+
+            <code class="ruby">end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="116">
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="117">
             
 
             
@@ -1301,7 +1925,7 @@
     <h3>app/controllers/api/v1/merchants_controller.rb</h3>
     <h4>
       <span class="green">
-  100.0%
+  93.55%
 </span>
 
       lines covered
@@ -1310,9 +1934,9 @@
     
 
     <div class="t-line-summary">
-      <b>25</b> relevant lines.
-      <span class="green"><b>25</b> lines covered</span> and
-      <span class="red"><b>0</b> lines missed.</span>
+      <b>31</b> relevant lines.
+      <span class="green"><b>29</b> lines covered</span> and
+      <span class="red"><b>2</b> lines missed.</span>
     </div>
 
     
@@ -1347,12 +1971,14 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="3">
+          <li class="covered" data-hits="1" data-linenumber="3">
+            
+              <span class="hits">1</span>
             
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">before_action :validate_name_param, only: [:find_one]</code>
           </li>
         </div>
       
@@ -1678,17 +2304,17 @@
 
             
 
-            <code class="ruby">        render json: MerchantSerializer.new(merchant)</code>
+            <code class="ruby">        if merchant.nil?</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="33">
+          <li class="missed" data-hits="0" data-linenumber="33">
             
 
             
 
-            <code class="ruby">    end</code>
+            <code class="ruby">            render json:    </code>
           </li>
         </div>
       
@@ -1698,19 +2324,17 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">            { data: {}    </code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="35">
-            
-              <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="35">
             
 
             
 
-            <code class="ruby">    private</code>
+            <code class="ruby">            }</code>
           </li>
         </div>
       
@@ -1720,7 +2344,7 @@
 
             
 
-            <code class="ruby">        </code>
+            <code class="ruby">        else</code>
           </li>
         </div>
       
@@ -1732,19 +2356,17 @@
 
             
 
-            <code class="ruby">    def merchant_params</code>
+            <code class="ruby">        render json: MerchantSerializer.new(merchant)</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="38">
-            
-              <span class="hits">2</span>
+          <li class="never" data-hits="" data-linenumber="38">
             
 
             
 
-            <code class="ruby">    params.require(:merchant).permit(:name)</code>
+            <code class="ruby">        end</code>
           </li>
         </div>
       
@@ -1776,12 +2398,78 @@
 
             
 
+            <code class="ruby">    private</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="42">
+            
+
+            
+
+            <code class="ruby">        </code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="43">
+            
+              <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    def merchant_params</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="2" data-linenumber="44">
+            
+              <span class="hits">2</span>
+            
+
+            
+
+            <code class="ruby">    params.require(:merchant).permit(:name)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="45">
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="46">
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="47">
+            
+              <span class="hits">1</span>
+            
+
+            
+
             <code class="ruby">    def not_found_error_response(error)</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="3" data-linenumber="42">
+          <li class="covered" data-hits="3" data-linenumber="48">
             
               <span class="hits">3</span>
             
@@ -1793,7 +2481,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="43">
+          <li class="never" data-hits="" data-linenumber="49">
             
 
             
@@ -1803,7 +2491,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="44">
+          <li class="never" data-hits="" data-linenumber="50">
             
 
             
@@ -1813,7 +2501,151 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="45">
+          <li class="never" data-hits="" data-linenumber="51">
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="52">
+            
+              <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    def validate_name_param</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="53">
+            
+              <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">        if params[:name] == &quot;&quot; || params[:name].nil?</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="54">
+            
+
+            
+
+            <code class="ruby">            render json:    {</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="55">
+            
+
+            
+
+            <code class="ruby">                errors: [</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="56">
+            
+
+            
+
+            <code class="ruby">                  {</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="57">
+            
+
+            
+
+            <code class="ruby">                    status: &quot;400&quot;,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="58">
+            
+
+            
+
+            <code class="ruby">                    message: &quot;Invalid parameters&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="59">
+            
+
+            
+
+            <code class="ruby">                  }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="60">
+            
+
+            
+
+            <code class="ruby">                ]</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="61">
+            
+
+            
+
+            <code class="ruby">              },</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="62">
+            
+
+            
+
+            <code class="ruby">              status: :bad_request</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="63">
+            
+
+            
+
+            <code class="ruby">        end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="64">
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="65">
             
 
             
@@ -2640,14 +3472,12 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="8">
-            
-              <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="8">
             
 
             
 
-            <code class="ruby">  def self.sorted_by_price</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -2659,17 +3489,19 @@
 
             
 
-            <code class="ruby">    order(:unit_price)</code>
+            <code class="ruby">  def self.sorted_by_price</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="10">
+          <li class="covered" data-hits="1" data-linenumber="10">
+            
+              <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">  end</code>
+            <code class="ruby">    order(:unit_price)</code>
           </li>
         </div>
       
@@ -2679,12 +3511,22 @@
 
             
 
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="12">
+            
+
+            
+
             <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="12">
+          <li class="covered" data-hits="1" data-linenumber="13">
             
               <span class="hits">1</span>
             
@@ -2696,7 +3538,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="4" data-linenumber="13">
+          <li class="covered" data-hits="4" data-linenumber="14">
             
               <span class="hits">4</span>
             
@@ -2708,7 +3550,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="4" data-linenumber="14">
+          <li class="covered" data-hits="4" data-linenumber="15">
             
               <span class="hits">4</span>
             
@@ -2720,7 +3562,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="4" data-linenumber="15">
+          <li class="covered" data-hits="4" data-linenumber="16">
             
               <span class="hits">4</span>
             
@@ -2732,7 +3574,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="16">
+          <li class="never" data-hits="" data-linenumber="17">
             
 
             
@@ -2742,7 +3584,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="4" data-linenumber="17">
+          <li class="covered" data-hits="4" data-linenumber="18">
             
               <span class="hits">4</span>
             
@@ -2754,7 +3596,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="18">
+          <li class="covered" data-hits="1" data-linenumber="19">
             
               <span class="hits">1</span>
             
@@ -2766,7 +3608,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="3" data-linenumber="19">
+          <li class="covered" data-hits="3" data-linenumber="20">
             
               <span class="hits">3</span>
             
@@ -2778,7 +3620,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="20">
+          <li class="covered" data-hits="1" data-linenumber="21">
             
               <span class="hits">1</span>
             
@@ -2790,7 +3632,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="21">
+          <li class="covered" data-hits="2" data-linenumber="22">
             
               <span class="hits">2</span>
             
@@ -2802,7 +3644,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="22">
+          <li class="covered" data-hits="1" data-linenumber="23">
             
               <span class="hits">1</span>
             
@@ -2814,7 +3656,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="23">
+          <li class="never" data-hits="" data-linenumber="24">
             
 
             
@@ -2824,7 +3666,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="24">
+          <li class="covered" data-hits="1" data-linenumber="25">
             
               <span class="hits">1</span>
             
@@ -2836,7 +3678,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="25">
+          <li class="never" data-hits="" data-linenumber="26">
             
 
             
@@ -2846,7 +3688,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="26">
+          <li class="never" data-hits="" data-linenumber="27">
             
 
             
@@ -2856,7 +3698,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="27">
+          <li class="never" data-hits="" data-linenumber="28">
             
 
             
@@ -2866,7 +3708,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="28">
+          <li class="never" data-hits="" data-linenumber="29">
             
 
             

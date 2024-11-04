@@ -53,29 +53,27 @@ before_action :validate_price_params, only: [:find_all]
     end
 
     def validate_price_params
-        if (params[:max_price].present? && params[:max_price].to_f < 0)|| (params[:min_price].present? && params[:min_price].to_f < 0)
-            render json:    {
-                errors: [
-                  {
-                    status: "400",
-                    message: "Invalid parameters"
-                  }
-                ]
-              },
-              status: :bad_request
-        end
-        if params[:name].present? && (params[:min_price].present? || params[:max_price].present?)
-            render json:    {
-                errors: [
-                    {
-                    status: "400",
-                    message: "Invalid parameters"
-                    }
-                ]
-                },
-                status: :bad_request
-        end
+        invalid_params = {
+            errors: [
+              {
+                status: "400",
+                message: "Invalid parameters"
+              }
+            ]
+          }
+          if (params[:max_price].present? && params[:max_price].to_f < 0) ||
+            (params[:min_price].present? && params[:min_price].to_f < 0) ||
+            (params[:name].present? && (params[:min_price].present? || params[:max_price].present?)) ||
+            (params[:max_price].present? && params[:max_price] == "") ||
+            (params[:min_price].present? && params[:min_price] == "") ||
+            ([params[:max_price], params[:min_price], params[:name]].all?(&:nil?) || 
+             [params[:max_price], params[:min_price]].all?(&:nil?) && params[:name] == "")
+       
+           render json: invalid_params, status: :bad_request
+         end
+
     end
+        
 end
 
 
