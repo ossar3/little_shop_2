@@ -2,7 +2,7 @@ class Api::V1::MerchantsController < ApplicationController
 rescue_from ActiveRecord::RecordNotFound, with: :not_found_error_response
 rescue_from ActionController::ParameterMissing, with: :bad_request_error_response
 rescue_from ActionDispatch::Http::Parameters::ParseError, with: :handle_parse_error
-
+before_action :validate_name_param, only: [:find_one]
     def index
         merchants = Merchant.fetch_merchants(params)
         render json: MerchantSerializer.new(merchants, { params: { count: params[:count], sorted: params[:sorted] } })
@@ -31,7 +31,13 @@ rescue_from ActionDispatch::Http::Parameters::ParseError, with: :handle_parse_er
 
     def find_one
         merchant = Merchant.find_one_by_name(params)
+        if merchant.nil?
+            render json:    
+            { data: {}    
+            }
+        else
         render json: MerchantSerializer.new(merchant)
+        end
     end
 
     private
@@ -50,5 +56,19 @@ rescue_from ActionDispatch::Http::Parameters::ParseError, with: :handle_parse_er
 
     def handle_parse_error(error)
         render json: ErrorSerializer.new(ErrorMessage.new("Invalid JSON format", 400)).serialize_json, status: :bad_request
+    end
+
+    def validate_name_param
+        if params[:name] == "" || params[:name].nil?
+            render json:    {
+                errors: [
+                  {
+                    status: "400",
+                    message: "Invalid parameters"
+                  }
+                ]
+              },
+              status: :bad_request
+        end
     end
 end
