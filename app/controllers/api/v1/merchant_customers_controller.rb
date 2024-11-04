@@ -14,9 +14,7 @@ class Api::V1::MerchantCustomersController < ApplicationController
 
     def validate_merchant
         merchant = Merchant.find_by(id: params[:id])
-        binding.pry
         if merchant == nil
-            binding.pry
             error_message = ErrorMessage.new("Merchant not found", 404)
             render json: ErrorSerializer.new(error_message).serialize_json, status: :not_found
         end
