@@ -35,8 +35,10 @@ begin
 rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
+
 RSpec.configure do |config|
-  # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
+  # Add FactoryBot syntax methods for cleaner use in tests
+  config.include FactoryBot::Syntax::Methods
   config.fixture_paths = [
     Rails.root.join('spec/fixtures')
   ]
@@ -78,3 +80,4 @@ Shoulda::Matchers.configure do |config|
     with.library :rails
   end
 end
+
