@@ -25,7 +25,7 @@ rescue_from ActionDispatch::Http::Parameters::ParseError, with: :handle_parse_er
     end
 
     def create
-        item = Item.new(item_params)
+        item = Item.create!(item_params)
         render json: ItemSerializer.new(item)
     end
 
