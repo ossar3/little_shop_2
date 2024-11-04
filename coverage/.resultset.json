@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/oscarmacboo/turing/little_shop/config/environment.rb": {
+      "/Users/montyp/mod2/little_shop/config/environment.rb": {
         "lines": [
           null,
           1,
@@ -10,7 +10,7 @@
           1
         ]
       },
-      "/Users/oscarmacboo/turing/little_shop/config/application.rb": {
+      "/Users/montyp/mod2/little_shop/config/application.rb": {
         "lines": [
           1,
           null,
@@ -58,7 +58,7 @@
           null
         ]
       },
-      "/Users/oscarmacboo/turing/little_shop/config/boot.rb": {
+      "/Users/montyp/mod2/little_shop/config/boot.rb": {
         "lines": [
           1,
           null,
@@ -66,7 +66,7 @@
           1
         ]
       },
-      "/Users/oscarmacboo/turing/little_shop/config/environments/test.rb": {
+      "/Users/montyp/mod2/little_shop/config/environments/test.rb": {
         "lines": [
           1,
           null,
@@ -137,7 +137,7 @@
           null
         ]
       },
-      "/Users/oscarmacboo/turing/little_shop/config/initializers/cors.rb": {
+      "/Users/montyp/mod2/little_shop/config/initializers/cors.rb": {
         "lines": [
           null,
           null,
@@ -157,7 +157,7 @@
           null
         ]
       },
-      "/Users/oscarmacboo/turing/little_shop/config/initializers/filter_parameter_logging.rb": {
+      "/Users/montyp/mod2/little_shop/config/initializers/filter_parameter_logging.rb": {
         "lines": [
           null,
           null,
@@ -169,7 +169,7 @@
           null
         ]
       },
-      "/Users/oscarmacboo/turing/little_shop/config/initializers/inflections.rb": {
+      "/Users/montyp/mod2/little_shop/config/initializers/inflections.rb": {
         "lines": [
           null,
           null,
@@ -189,7 +189,7 @@
           null
         ]
       },
-      "/Users/oscarmacboo/turing/little_shop/config/routes.rb": {
+      "/Users/montyp/mod2/little_shop/config/routes.rb": {
         "lines": [
           1,
           null,
@@ -207,32 +207,383 @@
           1,
           1,
           1,
-          null,
-          null,
           1,
           null,
           null,
-          1,
-          1,
-          1,
-          1,
           1,
           null,
           null,
           1,
           1,
+          1,
+          1,
+          1,
+          1,
           null,
           null,
+          1,
+          1,
           null,
           null
         ]
       },
-      "/Users/oscarmacboo/turing/little_shop/spec/requests/api/v1/invoices_request_spec.rb": {
+      "/Users/montyp/mod2/little_shop/app/models/customer.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          null
+        ]
+      },
+      "/Users/montyp/mod2/little_shop/app/models/application_record.rb": {
+        "lines": [
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/montyp/mod2/little_shop/spec/models/invoice_items_spec.rb": {
         "lines": [
 
         ]
       },
-      "/Users/oscarmacboo/turing/little_shop/spec/requests/api/v1/item_merchants_request_spec.rb": {
+      "/Users/montyp/mod2/little_shop/spec/models/invoice_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          2,
+          null,
+          null,
+          1,
+          2,
+          null,
+          null
+        ]
+      },
+      "/Users/montyp/mod2/little_shop/app/models/invoice.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null
+        ]
+      },
+      "/Users/montyp/mod2/little_shop/spec/models/item_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          null,
+          null,
+          1,
+          2,
+          2,
+          2,
+          null,
+          null,
+          1,
+          1,
+          7,
+          null,
+          7,
+          7,
+          7,
+          7,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/montyp/mod2/little_shop/app/models/item.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          3,
+          null,
+          null,
+          1,
+          8,
+          8,
+          8,
+          null,
+          8,
+          2,
+          6,
+          2,
+          4,
+          2,
+          null,
+          2,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/montyp/mod2/little_shop/spec/models/merchant_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          null,
+          null,
+          1,
+          2,
+          null,
+          null,
+          1,
+          1,
+          8,
+          8,
+          8,
+          null,
+          8,
+          8,
+          8,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/montyp/mod2/little_shop/app/models/merchant.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          10,
+          10,
+          10,
+          null,
+          null,
+          1,
+          10,
+          2,
+          8,
+          2,
+          null,
+          6,
+          null,
+          null,
+          null,
+          1,
+          2,
+          12,
+          6,
+          null,
+          null,
+          null,
+          1,
+          2,
+          null,
+          null,
+          1,
+          2,
+          null,
+          null,
+          1,
+          4,
+          null,
+          null,
+          1,
+          2,
+          2,
+          null,
+          null
+        ]
+      },
+      "/Users/montyp/mod2/little_shop/spec/models/transaction_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          null,
+          null,
+          1,
+          2,
+          2,
+          null,
+          null
+        ]
+      },
+      "/Users/montyp/mod2/little_shop/app/models/transaction.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          null
+        ]
+      },
+      "/Users/montyp/mod2/little_shop/spec/requests/api/v1/invoice_customer_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/montyp/mod2/little_shop/spec/requests/api/v1/invoices_request_spec.rb": {
+        "lines": [
+
+        ]
+      },
+      "/Users/montyp/mod2/little_shop/spec/requests/api/v1/item_merchants_request_spec.rb": {
         "lines": [
           1,
           null,
@@ -258,24 +609,19 @@
           null
         ]
       },
-      "/Users/oscarmacboo/turing/little_shop/spec/requests/api/v1/item_merchants_requst_spec.rb": {
-        "lines": [
-
-        ]
-      },
-      "/Users/oscarmacboo/turing/little_shop/spec/requests/api/v1/items_requests_spec.rb": {
+      "/Users/montyp/mod2/little_shop/spec/requests/api/v1/items_requests_spec.rb": {
         "lines": [
           1,
           null,
           1,
           1,
-          6,
-          6,
-          6,
+          15,
+          15,
+          15,
           null,
-          6,
-          6,
-          6,
+          15,
+          15,
+          15,
           null,
           null,
           1,
@@ -405,15 +751,122 @@
           1,
           null,
           null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
           null
         ]
       },
-      "/Users/oscarmacboo/turing/little_shop/spec/requests/api/v1/merchant_customers_request_spec.rb": {
+      "/Users/montyp/mod2/little_shop/spec/requests/api/v1/merchant_customers_request_spec.rb": {
         "lines": [
 
         ]
       },
-      "/Users/oscarmacboo/turing/little_shop/spec/requests/api/v1/merchant_invoices_request_spec.rb": {
+      "/Users/montyp/mod2/little_shop/spec/requests/api/v1/merchant_invoices_request_spec.rb": {
         "lines": [
           1,
           null,
@@ -453,7 +906,7 @@
           null
         ]
       },
-      "/Users/oscarmacboo/turing/little_shop/spec/requests/api/v1/merchant_items_request_spec.rb": {
+      "/Users/montyp/mod2/little_shop/spec/requests/api/v1/merchant_items_request_spec.rb": {
         "lines": [
           1,
           null,
@@ -484,19 +937,19 @@
           null
         ]
       },
-      "/Users/oscarmacboo/turing/little_shop/spec/requests/api/v1/merchants_requests_spec.rb": {
+      "/Users/montyp/mod2/little_shop/spec/requests/api/v1/merchants_requests_spec.rb": {
         "lines": [
           1,
           null,
           1,
           1,
-          11,
-          11,
-          11,
+          14,
+          14,
+          14,
           null,
-          11,
-          11,
-          11,
+          14,
+          14,
+          14,
           null,
           null,
           1,
@@ -683,134 +1136,169 @@
           1,
           null,
           null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
           null
         ]
       },
-      "/Users/oscarmacboo/turing/little_shop/app/models/merchant.rb": {
+      "/Users/montyp/mod2/little_shop/spec/serializers/error_serializer_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          3,
+          3,
+          3,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/montyp/mod2/little_shop/app/serializers/error_serializer.rb": {
+        "lines": [
+          1,
+          1,
+          13,
+          null,
+          null,
+          1,
+          null,
+          13,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/montyp/mod2/little_shop/app/controllers/api/v1/item_merchants_controller.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/montyp/mod2/little_shop/app/controllers/application_controller.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/Users/montyp/mod2/little_shop/app/serializers/merchant_serializer.rb": {
         "lines": [
           1,
           1,
           1,
           null,
+          21,
+          21,
+          null,
+          null
+        ]
+      },
+      "/Users/montyp/mod2/little_shop/app/controllers/api/v1/items_controller.rb": {
+        "lines": [
+          1,
+          1,
+          1,
           1,
           null,
           1,
-          5,
-          5,
-          5,
+          3,
+          3,
           null,
           null,
           1,
-          5,
+          2,
+          1,
+          null,
+          null,
+          1,
+          2,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          2,
+          null,
+          null,
+          1,
+          3,
+          1,
+          null,
+          null,
           1,
           4,
-          1,
-          null,
-          3,
-          null,
-          null,
-          null,
-          1,
-          1,
-          6,
-          3,
-          null,
-          null,
-          null,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          null,
-          null,
-          1,
           0,
           null,
-          null
-        ]
-      },
-      "/Users/oscarmacboo/turing/little_shop/app/models/application_record.rb": {
-        "lines": [
-          1,
-          1,
-          null
-        ]
-      },
-      "/Users/oscarmacboo/turing/little_shop/app/models/item.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
-          1,
-          null,
-          null
-        ]
-      },
-      "/Users/oscarmacboo/turing/little_shop/app/controllers/api/v1/item_merchants_controller.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null
-        ]
-      },
-      "/Users/oscarmacboo/turing/little_shop/app/controllers/application_controller.rb": {
-        "lines": [
-          1,
-          null
-        ]
-      },
-      "/Users/oscarmacboo/turing/little_shop/app/serializers/merchant_serializer.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          null,
-          20,
-          20,
-          null,
-          null
-        ]
-      },
-      "/Users/oscarmacboo/turing/little_shop/app/controllers/api/v1/items_controller.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          3,
-          3,
-          null,
-          null,
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
           null,
           null,
           null,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          1,
-          null,
+          4,
+          4,
           null,
           null,
           1,
@@ -820,14 +1308,26 @@
           null,
           null,
           1,
-          2,
+          4,
+          null,
+          null,
+          1,
+          3,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
           null,
           null,
           null,
           null
         ]
       },
-      "/Users/oscarmacboo/turing/little_shop/app/serializers/item_serializer.rb": {
+      "/Users/montyp/mod2/little_shop/app/serializers/item_serializer.rb": {
         "lines": [
           1,
           1,
@@ -835,28 +1335,19 @@
           null
         ]
       },
-      "/Users/oscarmacboo/turing/little_shop/app/models/customer.rb": {
+      "/Users/montyp/mod2/little_shop/app/models/concerns/error_message.rb": {
         "lines": [
           1,
           1,
           null,
           1,
-          null
-        ]
-      },
-      "/Users/oscarmacboo/turing/little_shop/app/models/invoice.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          1,
-          1,
+          10,
+          10,
           null,
-          1,
           null
         ]
       },
-      "/Users/oscarmacboo/turing/little_shop/app/controllers/api/v1/merchants_invoices_controller.rb": {
+      "/Users/montyp/mod2/little_shop/app/controllers/api/v1/merchants_invoices_controller.rb": {
         "lines": [
           1,
           1,
@@ -881,7 +1372,7 @@
           null
         ]
       },
-      "/Users/oscarmacboo/turing/little_shop/app/serializers/merchant_invoice_serializer.rb": {
+      "/Users/montyp/mod2/little_shop/app/serializers/merchant_invoice_serializer.rb": {
         "lines": [
           1,
           1,
@@ -889,7 +1380,7 @@
           null
         ]
       },
-      "/Users/oscarmacboo/turing/little_shop/app/controllers/api/v1/merchant_items_controller.rb": {
+      "/Users/montyp/mod2/little_shop/app/controllers/api/v1/merchant_items_controller.rb": {
         "lines": [
           1,
           1,
@@ -900,8 +1391,10 @@
           null
         ]
       },
-      "/Users/oscarmacboo/turing/little_shop/app/controllers/api/v1/merchants_controller.rb": {
+      "/Users/montyp/mod2/little_shop/app/controllers/api/v1/merchants_controller.rb": {
         "lines": [
+          1,
+          1,
           1,
           1,
           null,
@@ -927,58 +1420,36 @@
           null,
           null,
           1,
+          3,
+          1,
+          null,
+          null,
+          1,
           1,
           1,
           null,
           null,
-          null,
           1,
           null,
           1,
-          2,
+          4,
           null,
           null,
           1,
           3,
           null,
           null,
-          null
-        ]
-      },
-      "/Users/oscarmacboo/turing/little_shop/app/serializers/error_serializer.rb": {
-        "lines": [
-          1,
-          1,
-          3,
-          null,
-          null,
-          1,
-          null,
-          3,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/oscarmacboo/turing/little_shop/app/models/concerns/error_message.rb": {
-        "lines": [
           1,
           1,
           null,
+          null,
           1,
-          3,
-          3,
+          1,
           null,
           null
         ]
       }
     },
-    "timestamp": 1730508772
+    "timestamp": 1730671510
   }
 }

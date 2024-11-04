@@ -38,4 +38,9 @@ class Merchant < ApplicationRecord
   def item_count 
     self.items.count
   end
+
+  def self.find_one_by_name(params)
+    name_input = params[:name]
+    where("name ILIKE ?", "%#{name_input}%").order("LOWER(name)").first
+  end
 end

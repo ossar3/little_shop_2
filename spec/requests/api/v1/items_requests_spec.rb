@@ -136,6 +136,113 @@ RSpec.describe "Item endpoints", type: :request do
 
     prices = items.map { |item| item[:attributes][:unit_price] }
     expect(prices).to eq(prices.sort)
-
   end
+
+  it "returns a 404 error when trying to retrieve a non-existent item" do
+    get "/api/v1/items/99999" 
+  
+    error_response = JSON.parse(response.body, symbolize_names: true)
+  
+    expect(response.status).to eq(404)
+    expect(error_response[:message]).to eq("your query could not be completed")
+  end
+  
+  it "returns a 404 error when trying to update a non-existent item" do
+    item_params = { name: "Non-existent Item", description: "This won't work", unit_price: 1.99, merchant_id: @merchant_1.id }
+    headers = { "CONTENT_TYPE" => "application/json" }
+  
+    put "/api/v1/items/99999", headers: headers, params: JSON.generate({ item: item_params }) 
+  
+    error_response = JSON.parse(response.body, symbolize_names: true)
+  
+    expect(response.status).to eq(404)
+    expect(error_response[:message]).to eq("your query could not be completed")
+  end
+  
+  it "returns a 404 error when trying to delete a non-existent item" do
+    delete "/api/v1/items/99999" 
+  
+    error_response = JSON.parse(response.body, symbolize_names: true)
+  
+    expect(response.status).to eq(404)
+    expect(error_response[:message]).to eq("your query could not be completed")
+  end
+
+  describe "find all ITEMS based on search criteria" do
+    it "can find all items by name" do
+      @item_4 = Item.create!(name: "a baking mat", description: "Description 4", unit_price: 20.0, merchant: @merchant_3)
+
+       get "/api/v1/items/find_all?name=bAk"
+
+       items = JSON.parse(response.body, symbolize_names: true)
+
+       expect(response).to be_successful
+       expect(items).to be_an(Hash)
+       expect(items[:data].count).to eq(2)
+       expect(items[:data][0][:attributes][:name]).to eq(@item_4.name)
+       expect(items[:data][1][:attributes][:name]).to eq(@item_3.name)
+    end
+
+    it "can find items by min_price" do
+      get "/api/v1/items/find_all?min_price=50"
+
+      items = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to be_successful
+      expect(items).to be_an(Hash)
+      expect(items[:data].count).to eq(2)
+      expect(items[:data][0][:attributes][:name]).to eq(@item_2.name)
+      expect(items[:data][1][:attributes][:name]).to eq(@item_1.name)
+    end
+
+    it "can find items by max_price" do
+      get "/api/v1/items/find_all?max_price=200"
+
+      items = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to be_successful
+      expect(items).to be_an(Hash)
+      expect(items[:data].count).to eq(2)
+      expect(items[:data][0][:attributes][:name]).to eq(@item_1.name)
+      expect(items[:data][1][:attributes][:name]).to eq(@item_3.name)
+    end
+
+    it 'can find items by min and max price' do
+      get "/api/v1/items/find_all?max_price=200&min_price=21"
+
+      items = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to be_successful
+      expect(items).to be_an(Hash)
+      expect(items[:data].count).to eq(1)
+      expect(items[:data][0][:attributes][:name]).to eq(@item_1.name)
+    end
+  end
+
+
+  describe "POST /api/v1/items", type: :request do
+    it "returns a 400 error with bad request response" do
+
+      post "/api/v1/items", params: {}
+  
+      expect(response).to have_http_status(:bad_request)
+  
+      json_response = JSON.parse(response.body, symbolize_names: true)
+      expect(json_response[:message]).to eq("your query could not be completed")
+      expect(json_response[:errors]).to be_an(Array)
+      expect(json_response[:errors][0][:status]).to eq("400")
+      expect(json_response[:errors][0][:title]).to include("param is missing")
+    end
+  end 
+
+  describe "POST /api/v1/items with invalid JSON", type: :request do
+    it "returns a 400 error for invalid JSON format" do
+      post "/api/v1/items", params: "{ invalid json", headers: { "CONTENT_TYPE" => "application/json" }
+  
+      expect(response).to have_http_status(:bad_request)
+      json_response = JSON.parse(response.body, symbolize_names: true)
+      expect(json_response[:errors][0][:title]).to eq("Invalid JSON format")
+    end
+  end
+
 end
