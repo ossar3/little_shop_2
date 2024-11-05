@@ -284,4 +284,51 @@ RSpec.describe "Item endpoints", type: :request do
     end
   end
 
+  describe "Can create items sad paths" do 
+    it "can't create new items with no price" do 
+      attributes = {
+        name: "chocolate bar",
+        description: "sweet and delicious",
+        merchant_id: 1
+      }
+    
+      post "/api/v1/items", params:{item: attributes}
+        
+      expect(response).to_not have_http_status(200)
+    
+      get "/api/v1/items"
+
+      expect(response).to have_http_status(200)
+    end
+
+    it "can't create new items with no name" do 
+      attributes = {
+        description: "sweet and delicious",
+        unit_price: 3.99,
+        merchant_id: 1
+      }
+      
+      post "/api/v1/items", params:{item: attributes}
+          
+      expect(response).to_not have_http_status(200)
+      
+      get "/api/v1/items"
+  
+      expect(response).to have_http_status(200)
+    end
+
+    it "can't create an item using the wrong class template" do 
+      attributes = {
+        name: "the chocolate bar guy",
+      }
+
+      post "/api/v1/items", params:{item: attributes}
+
+      expect(response).to_not have_http_status(200)
+
+      get "/api/v1/items"
+
+      expect(response).to have_http_status(200)
+    end
+  end
 end
