@@ -3,6 +3,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :not_found_error_response
 rescue_from ActionController::ParameterMissing, with: :bad_request_error_response
 rescue_from ActionDispatch::Http::Parameters::ParseError, with: :handle_parse_error
 rescue_from ActiveRecord::RecordInvalid, with: :record_invalid_error
+rescue_from ActiveRecord::RecordInvalid, with: :unprocessable_entity_response
 before_action :validate_find_params, only: [:find_all]
 
     def index
@@ -50,7 +51,7 @@ end
     end
 
     def not_found_error_response(error)
-        render json: ErrorSerializer.new(ErrorMessage.new(error.message, 404)).serialize_json, status: :not_found
+      render json: ErrorSerializer.new(ErrorMessage.new("your query could not be completed", 404)).serialize_json, status: :not_found
     end
 
     def bad_request_error_response(error)
@@ -60,6 +61,10 @@ end
     def handle_parse_error(error)
         render json: ErrorSerializer.new(ErrorMessage.new("Invalid JSON format", 400)).serialize_json, status: :bad_request
     end
+
+    def unprocessable_entity_response(error)
+        render json: ErrorSerializer.new(ErrorMessage.new(error.message, 422)).serialize_json, status: :unprocessable_entity
+      end
 
     def record_invalid_error_response(item)
         render json: ErrorSerializer.new(ErrorMessage.new(item.errors.full_messages.join(', '), 422)).serialize_json, status: :unprocessable_entity

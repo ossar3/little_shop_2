@@ -22,6 +22,16 @@ RSpec.describe "Item_merchants", type: :request do
         expect(items[:data].count).to eq(2)
         expect(items[:data][0][:id]).to eq(@item_2.id.to_s)
         expect(items[:data][1][:id]).to eq(@item_3.id.to_s)
+    end
 
+    it "returns a 404 error when the merchant does not exist" do
+        get "/api/v1/merchants/9999/items" 
+
+        expect(response).to have_http_status(:not_found)
+
+        json_response = JSON.parse(response.body, symbolize_names: true)
+        expect(json_response[:errors]).to be_an(Array)
+        expect(json_response[:errors][0][:status]).to eq("404")
+        expect(json_response[:errors][0][:title]).to eq("Couldn't find Merchant with 'id'=9999")
     end
 end
