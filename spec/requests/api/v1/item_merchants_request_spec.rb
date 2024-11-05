@@ -19,4 +19,13 @@ RSpec.describe "Item_merchants", type: :request do
         expect(response.status).to eq(200)
         expect(merchant[:data][:id]).to eq(item_merchant.to_s)
     end
+
+    it "returns a 404 error when trying to retrieve a non-existent item" do
+        get "/api/v1/items/99999/merchant" 
+      
+        error_response = JSON.parse(response.body, symbolize_names: true)
+      
+        expect(response.status).to eq(404)
+        expect(error_response[:message]).to eq("your query could not be completed")
+      end
 end
