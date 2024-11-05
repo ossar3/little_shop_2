@@ -159,14 +159,17 @@ RSpec.describe "Item endpoints", type: :request do
   
   it "returns a 404 error when trying to update a non-existent item" do
     item_params = { name: "Non-existent Item", description: "This won't work", unit_price: 1.99, merchant_id: @merchant_1.id }
-    headers = { "CONTENT_TYPE" => "application/json" }
+    headers = { "CONTENT_TYPE" => "application/json"}
   
-    put "/api/v1/items/99999", headers: headers, params: JSON.generate({ item: item_params }) 
-  
+    patch "/api/v1/items/99999", headers: headers, params: JSON.generate({ item: item_params }) 
+ 
     error_response = JSON.parse(response.body, symbolize_names: true)
   
     expect(response.status).to eq(404)
+    
     expect(error_response[:message]).to eq("your query could not be completed")
+    expect(error_response[:errors].first[:status]).to eq("404")
+    expect(error_response[:errors].first[:title]).to eq("your query could not be completed")
   end
 
   

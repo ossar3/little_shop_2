@@ -51,7 +51,7 @@ end
     end
 
     def not_found_error_response(error)
-        render json: ErrorSerializer.new(ErrorMessage.new(error.message, 404)).serialize_json, status: :not_found
+      render json: ErrorSerializer.new(ErrorMessage.new("your query could not be completed", 404)).serialize_json, status: :not_found
     end
 
     def bad_request_error_response(error)
