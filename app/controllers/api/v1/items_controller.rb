@@ -32,13 +32,7 @@ before_action :validate_find_params, only: [:find_all]
 
     def find_all
         items = Item.find_all_items(params)
-        if items.nil?
-            render json:    
-            { data: {}    
-            }
-        else
         render json: ItemSerializer.new(items)
-        end
     end
 
     private 
