@@ -168,6 +168,17 @@ RSpec.describe "Merchants endpoints", type: :request do
       expect(json_response[:errors][0][:status]).to eq("404")
       expect(json_response[:errors][0][:title]).to eq("Couldn't find Merchant with 'id'=9999")
     end
+
+    it "returns a 404 error when searching with a string" do
+      get "/api/v1/merchants/merchant-name" 
+
+      expect(response).to have_http_status(:not_found)
+
+      json_response = JSON.parse(response.body, symbolize_names: true)
+      expect(json_response[:errors]).to be_an(Array)
+      expect(json_response[:errors][0][:status]).to eq("404")
+      expect(json_response[:errors][0][:title]).to eq("Couldn't find Merchant with 'id'=merchant-name")
+    end
   end
   
   describe "PATCH /api/v1/merchants/:id" do
@@ -207,6 +218,29 @@ RSpec.describe "Merchants endpoints", type: :request do
       expect(found_merchant.count).to eq(1)
       expect(found_merchant).to be_an(Hash)
       expect(found_merchant[:data][:attributes][:name]).to eq("a Test Merchant 4")
+    end
+
+    it 'returns an empty array if there are no matches' do
+       get "/api/v1/merchants/find?name=xxxxxxx"
+
+       merchant = JSON.parse(response.body, symbolize_names: true)
+      
+      expect(response).to be_successful
+      
+      expect(merchant).to be_an(Hash)
+      expect(merchant[:data]).to eq({})
+      expect(merchant).to eq({:data=>{}})
+    
+    end
+
+    it 'returns an error when name is not provided' do
+      get "/api/v1/merchants/find?name="
+
+      merchant = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to have_http_status(:bad_request)
+      expect(merchant[:errors][0][:status]).to eq("400")
+      
     end
   end
 
