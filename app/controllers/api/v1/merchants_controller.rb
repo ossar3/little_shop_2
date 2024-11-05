@@ -25,8 +25,8 @@ before_action :validate_name_param, only: [:find_one]
     end
    
     def create
-        merchant =  Merchant.create(merchant_params)
-        render json: MerchantSerializer.new(merchant)
+        merchant =  Merchant.create!(merchant_params)
+        render json: MerchantSerializer.new(merchant), status: :created
     end  
 
     def find_one
