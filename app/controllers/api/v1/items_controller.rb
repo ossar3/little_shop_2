@@ -2,6 +2,7 @@ class Api::V1::ItemsController < ApplicationController
 rescue_from ActiveRecord::RecordNotFound, with: :not_found_error_response
 rescue_from ActionController::ParameterMissing, with: :bad_request_error_response
 rescue_from ActionDispatch::Http::Parameters::ParseError, with: :handle_parse_error
+rescue_from ActiveRecord::RecordInvalid, with: :record_invalid_error
 rescue_from ActiveRecord::RecordInvalid, with: :unprocessable_entity_response
 before_action :validate_find_params, only: [:find_all]
 
@@ -16,11 +17,14 @@ before_action :validate_find_params, only: [:find_all]
     end
 
     def update
-        item = Item.find(params[:id])
-        if item.update(item_params)
-            render json: ItemSerializer.new(item), status: :ok
-        end
-    end
+  item = Item.find(params[:id])
+
+  if item.update(item_params)
+    render json: ItemSerializer.new(item), status: :ok
+  else
+    record_invalid_error_response(item)
+  end
+end
 
     def destroy
         Item.find(params[:id]).destroy
@@ -33,13 +37,7 @@ before_action :validate_find_params, only: [:find_all]
 
     def find_all
         items = Item.find_all_items(params)
-        if items.nil?
-            render json:    
-            { data: {}    
-            }
-        else
         render json: ItemSerializer.new(items)
-        end
     end
 
     private 
@@ -68,6 +66,10 @@ before_action :validate_find_params, only: [:find_all]
         render json: ErrorSerializer.new(ErrorMessage.new(error.message, 422)).serialize_json, status: :unprocessable_entity
       end
 
+    def record_invalid_error_response(item)
+        render json: ErrorSerializer.new(ErrorMessage.new(item.errors.full_messages.join(', '), 422)).serialize_json, status: :unprocessable_entity
+    end
+    
     def validate_find_params
         invalid_params = {
             errors: [

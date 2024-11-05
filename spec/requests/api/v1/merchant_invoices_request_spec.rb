@@ -33,4 +33,40 @@ RSpec.describe"merchant invoices endpoints:", type: :request do
         invoices = JSON.parse(response.body, symbolize_names: true)
         expect(invoices[:data].length).to eq(1)
     end
+    
+    
+#test can return 404 
+    it "returns a 404 error when the merchant nummber id does not exist" do
+        get "/api/v1/merchants/9999/invoices" 
+  
+        expect(response).to have_http_status(:not_found)
+  
+        json_response = JSON.parse(response.body, symbolize_names: true)
+        expect(json_response[:errors]).to be_an(Array)
+        expect(json_response[:errors][0][:status]).to eq("404")
+        expect(json_response[:errors][0][:title]).to eq("Couldn't find Merchant with 'id'=9999")
+      
+    end
+   
+    it "returns a 404 error when the merchant id does not exist/ wrong type" do
+        get "/api/v1/merchants/four/invoices" 
+  
+        expect(response).to have_http_status(:not_found)
+  
+        json_response = JSON.parse(response.body, symbolize_names: true)
+        expect(json_response[:errors]).to be_an(Array)
+        expect(json_response[:errors][0][:status]).to eq("404")
+        expect(json_response[:errors][0][:title]).to eq("Couldn't find Merchant with 'id'=four")
+      
+    end
+#edge case
+    it 'weird status name edge case(returns nothing, no error)' do
+        get "/api/v1/merchants/#{@merchant_1.id}/invoices?status=bing"
+        expect(response.status).to eq(200)
+
+        invoices = JSON.parse(response.body, symbolize_names: true)
+        expect(invoices[:data].length).to eq(0)
+    end
+
+
 end
