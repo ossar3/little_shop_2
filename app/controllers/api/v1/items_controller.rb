@@ -2,7 +2,7 @@ class Api::V1::ItemsController < ApplicationController
 rescue_from ActiveRecord::RecordNotFound, with: :not_found_error_response
 rescue_from ActionController::ParameterMissing, with: :bad_request_error_response
 rescue_from ActionDispatch::Http::Parameters::ParseError, with: :handle_parse_error
-
+rescue_from ActiveRecord::RecordInvalid, with: :record_invalid_error
     def index
         items = fetch_items
         render json: ItemSerializer.new(items)
@@ -14,11 +14,14 @@ rescue_from ActionDispatch::Http::Parameters::ParseError, with: :handle_parse_er
     end
 
     def update
-        item = Item.find(params[:id])
-        if item.update(item_params)
-            render json: ItemSerializer.new(item), status: :ok
-        end
-    end
+  item = Item.find(params[:id])
+
+  if item.update(item_params)
+    render json: ItemSerializer.new(item), status: :ok
+  else
+    record_invalid_error_response(item)
+  end
+end
 
     def destroy
         Item.find(params[:id]).destroy
@@ -60,6 +63,10 @@ rescue_from ActionDispatch::Http::Parameters::ParseError, with: :handle_parse_er
 
     def handle_parse_error(error)
         render json: ErrorSerializer.new(ErrorMessage.new("Invalid JSON format", 400)).serialize_json, status: :bad_request
+    end
+
+    def record_invalid_error_response(item)
+        render json: ErrorSerializer.new(ErrorMessage.new(item.errors.full_messages.join(', '), 422)).serialize_json, status: :unprocessable_entity
     end
 end
 
