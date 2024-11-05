@@ -257,4 +257,16 @@ RSpec.describe "Merchants endpoints", type: :request do
       expect(json_response[:errors][0][:title]).to eq("Invalid JSON format")
     end
   end
+
+  describe "cant create merchants with incorrect or invalid input" do
+    it "cant create a merchant with no name entered" do
+      attributes = {
+      }
+    
+      post "/api/v1/merchants", params:{merchant: attributes}
+      
+      expect(response).to_not have_http_status(200)
+    end
+  end
 end
+
