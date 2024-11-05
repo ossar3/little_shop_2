@@ -335,4 +335,15 @@ RSpec.describe "Item endpoints", type: :request do
       expect(response).to have_http_status(200)
     end
   end
+  describe "can't delete same item twice" do
+    it "can not delete same item twice" do
+
+    delete "/api/v1/merchants/#{@item_1.id}"
+    delete "/api/v1/merchants/#{@item_1.id}"
+
+    expect(response).to have_http_status(:not_found)
+    end
+  end
+
+
 end

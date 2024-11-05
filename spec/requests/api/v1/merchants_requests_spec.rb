@@ -205,6 +205,17 @@ RSpec.describe "Merchants endpoints", type: :request do
       expect(json_response[:errors][0][:status]).to eq("404")
       expect(json_response[:errors][0][:title]).to eq("Couldn't find Merchant with 'id'=9999")
     end
+
+    it "returns a 404 if the id is incorrect format" do
+      delete "/api/v1/merchants/mymerchant" 
+
+      expect(response).to have_http_status(:not_found)
+
+      json_response = JSON.parse(response.body, symbolize_names: true)
+      expect(json_response[:errors]).to be_an(Array)
+      expect(json_response[:errors][0][:status]).to eq("404")
+      expect(json_response[:errors][0][:title]).to eq("Couldn't find Merchant with 'id'=mymerchant")
+    end
   end
 
   describe "find one MERCHANT based on search criteria" do
@@ -277,6 +288,16 @@ RSpec.describe "Merchants endpoints", type: :request do
       post "/api/v1/merchants", params:{merchant: attributes}
       
       expect(response).to_not have_http_status(200)
+    end
+  end
+
+  describe "can't delete merchant twice" do
+    it "can not delete same merchant twice" do
+
+    delete "/api/v1/merchants/#{@merchant_1.id}"
+    delete "/api/v1/merchants/#{@merchant_1.id}"
+
+    expect(response).to have_http_status(:not_found) 
     end
   end
 end
