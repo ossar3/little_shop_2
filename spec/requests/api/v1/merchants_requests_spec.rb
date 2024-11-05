@@ -297,7 +297,7 @@ RSpec.describe "Merchants endpoints", type: :request do
     delete "/api/v1/merchants/#{@merchant_1.id}"
     delete "/api/v1/merchants/#{@merchant_1.id}"
 
-    expect(response).to have_http_status(:not_found)
+    expect(response).to have_http_status(:not_found) 
     end
   end
 end
