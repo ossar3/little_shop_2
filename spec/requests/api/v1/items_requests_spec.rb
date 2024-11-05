@@ -115,7 +115,7 @@ RSpec.describe "Item endpoints", type: :request do
     item_params = { name: "Test", description: "is successful", unit_price: 9.99, merchant_id: @merchant_2.id}
     headers = { "CONTENT_TYPE" => "application/json" }
 
-    put "/api/v1/items/#{@item_1.id}", headers: headers, params: JSON.generate({ item: item_params })
+    patch "/api/v1/items/#{@item_1.id}", headers: headers, params: JSON.generate({ item: item_params })
 
     changed_item = JSON.parse(response.body, symbolize_names: true)
 
@@ -166,6 +166,15 @@ RSpec.describe "Item endpoints", type: :request do
   
     expect(response.status).to eq(404)
     expect(error_response[:message]).to eq("your query could not be completed")
+  end
+
+  it "returns 422 error if update fails due to validation errors" do
+    patch "/api/v1/items/#{@item_1.id}", params: { item: { name: "" } }
+        
+    expect(response).to have_http_status(:unprocessable_entity)
+    
+    json_response = JSON.parse(response.body, symbolize_names: true)
+    expect(json_response[:errors][0][:title]).to include("can't be blank")
   end
 
   describe "find all ITEMS based on search criteria" do
