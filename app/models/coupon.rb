@@ -1,6 +1,6 @@
 class Coupon < ApplicationRecord
-    belongs_to :merchant, optional: true
-    has_one :invoice, optional: true
+    belongs_to :merchant
+    belongs_to :invoice, optional: true
 
     validates :name, presence: true
     validates :code, presence: true, uniqueness: true  # Ensure the coupon code is unique
@@ -16,7 +16,6 @@ class Coupon < ApplicationRecord
         if active && merchant.coupons.where(active: true).count >= 5
           errors.add(:base, "Merchant can have a maximum of 5 active coupons")
         end
-      end
     end
 end
     
