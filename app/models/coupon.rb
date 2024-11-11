@@ -6,7 +6,8 @@ class Coupon < ApplicationRecord
     validates :code, presence: true, uniqueness: true  # Ensure the coupon code is unique
     validates :discount_value, presence: true
     validates :coupon_type, inclusion: { in: ["percent", "dollar"] }  # Only allow percent or dollar for coupon type
-    validate :validate_discount_value
+   
+   
 
     validate :coupon_limit, on: [:create, :update]
 
