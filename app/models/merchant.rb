@@ -1,7 +1,7 @@
 class Merchant < ApplicationRecord
   has_many :invoices, dependent: :destroy
   has_many :items, dependent: :destroy
-  has_many :coupons, optional: true
+  has_many :coupons
 
   validates :name, presence: true
 
