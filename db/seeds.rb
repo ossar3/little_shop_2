@@ -22,11 +22,11 @@ system(cmd)
 # invoice2 = merchant1.invoices.create!(coupon: coupon2, amount: 150, status: "shipped")
 # invoice3 = merchant1.invoices.create!(coupon: coupon3, amount: 300, status: "packaged")
 merchant = Merchant.create!(id: 499, name: "The Coin store")
-puts "Created Merchant: #{merchant1.name}"
+puts "Created Merchant: #{merchant.name}"
 
-coupon1 = merchant.coupons.create!(id: 494, name: "BOGO50", code: "BOGO50", discount_value: 50, active: true, coupon_type: "percent")
-coupon2 = merchant.coupons.create!(id: 495, name: "Discount3", code: "3BUCKS", discount_value: 3, active: true, coupon_type: "dollar")
-coupon3 = merchant.coupons.create!(id: 496, name: "99%Off", code: "99percent", discount_value: 99, active: true, coupon_type: "percent")
+coupon1 = merchant.coupons.create!(id: 494, name: "BOGO50", code: "BOGO50", discount_value: 50, coupon_type: "percent")
+coupon2 = merchant.coupons.create!(id: 495, name: "Discount3", code: "3BUCKS", discount_value: 3, coupon_type: "dollar")
+coupon3 = merchant.coupons.create!(id: 496, name: "99%Off", code: "99percent", discount_value: 99, coupon_type: "percent")
 
 
 invoice1 = merchant.invoices.create!(id: 3, customer_id: 3, coupon_id: coupon1.id, status: "shipped")
