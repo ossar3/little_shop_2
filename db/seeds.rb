@@ -12,17 +12,9 @@ puts "Loading PostgreSQL Data dump into local database with command:"
 puts cmd
 system(cmd)
 
-# merchant1 = Merchant.create!(id: 444, name: "Mike's Awesome Store")
 
-# coupon1 = merchant1.coupons.create!(id: 444, name: "BOGO50", code: "BOGO50", discount_value: 50, active: true, coupon_type: "percent")
-# coupon2 = merchant1.coupons.create!(id: 445, name: "Discount3", code: "3BUCKS", discount_value: 3, active: true, coupon_type: "dollar")
-# coupon3 = merchant1.coupons.create!(id: 446, name: "99%Off", code: "99percent", discount_value: 99, active: true, coupon_type: "percent")
-
-# invoice1 = merchant1.invoices.create!(coupon: coupon1, amount: 200, status: "packaged")
-# invoice2 = merchant1.invoices.create!(coupon: coupon2, amount: 150, status: "shipped")
-# invoice3 = merchant1.invoices.create!(coupon: coupon3, amount: 300, status: "packaged")
 merchant = Merchant.create!(id: 499, name: "The Coin store")
-puts "Created Merchant: #{merchant.name}"
+puts "seed merchant: #{merchant.name}"
 
 coupon1 = merchant.coupons.create!(id: 494, name: "BOGO50", code: "BOGO50", discount_value: 50, coupon_type: "percent")
 coupon2 = merchant.coupons.create!(id: 495, name: "Discount3", code: "3BUCKS", discount_value: 3, coupon_type: "dollar")

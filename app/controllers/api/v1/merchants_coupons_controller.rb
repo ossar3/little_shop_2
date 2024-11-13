@@ -18,7 +18,7 @@ class Api::V1::MerchantsCouponsController < ApplicationController
     end
   
     def create
-        binding.pry
+    #can not have more than 5 active, and code must be uniqe
         merchant = Merchant.find(params[:merchant_id])
       coupon = merchant.coupons.create!(coupon_params)
       if coupon.save
