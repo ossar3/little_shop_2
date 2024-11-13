@@ -1,7 +1,7 @@
 class Merchant < ApplicationRecord
   has_many :invoices, dependent: :destroy
   has_many :items, dependent: :destroy
-  has_many :coupons
+  has_many :coupons, counter_cache: true
 
   validates :name, presence: true
 
